@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "vitest",
+    "test": "node --test src/__tests__/*.mjs",
+    "test:vitest": "vitest",
     "test:coverage": "vitest --coverage",
     "test:ui": "vitest --ui"
   },

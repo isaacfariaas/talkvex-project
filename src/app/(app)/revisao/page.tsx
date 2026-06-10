@@ -81,21 +81,15 @@ export default function RevisaoPage() {
 
   const loadWeeklyMetrics = async () => {
     try {
-      const res = await fetch("/api/daily/today");
+      const res = await fetch("/api/metrics/weekly");
       if (!res.ok) throw new Error("Erro ao carregar métricas");
       const data = await res.json();
-
-      const habitsCompleted = data.habits?.filter((h: any) => h.completed).length || 0;
-      const habitsTotal = data.habits?.length || 0;
-      const tasksCompleted = data.tasks?.filter((t: any) => t.completed).length || 0;
-      const tasksTotal = data.tasks?.length || 0;
-
       setMetrics({
-        habitsCompleted,
-        habitsTotal,
-        tasksCompleted,
-        tasksTotal,
-        currentStreak: 0,
+        habitsCompleted: data.habitsCompleted,
+        habitsTotal: data.habitsTotal,
+        tasksCompleted: data.tasksCompleted,
+        tasksTotal: data.tasksTotal,
+        currentStreak: data.currentStreak,
       });
     } catch (err) {
       console.error(err);

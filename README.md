@@ -58,6 +58,8 @@ cp .env.example .env
 
 Para desenvolvimento local os valores padrão do `.env.example` já funcionam com o Docker Compose.
 
+> **Variável obrigatória:** `ANTHROPIC_API_KEY` — chave de API da Anthropic necessária para geração de planos com IA. Obtenha a sua em [console.anthropic.com](https://console.anthropic.com/). Sem ela, os endpoints de geração de plano (`/api/plans/generate`, `/api/reviews/generate-questions`, `/api/reviews/[id]/adjust`) retornarão erro.
+
 ### 3. Suba o banco de dados
 
 ```bash
