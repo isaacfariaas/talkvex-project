@@ -41,7 +41,7 @@ describe("POST /api/register", () => {
     };
 
     vi.mocked(prisma.user.findUnique).mockResolvedValue(null);
-    vi.mocked(prisma.user.create).mockResolvedValue(mockUser as any);
+    vi.mocked(prisma.user.create).mockResolvedValue(mockUser as never);
 
     const request = new NextRequest("http://localhost/api/register", {
       method: "POST",
@@ -97,7 +97,7 @@ describe("POST /api/register", () => {
     vi.mocked(prisma.user.findUnique).mockResolvedValue({
       id: "existing-user",
       email: "existing@example.com",
-    } as any);
+    } as never);
 
     const request = new NextRequest("http://localhost/api/register", {
       method: "POST",

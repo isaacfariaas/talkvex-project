@@ -28,10 +28,10 @@ describe("RegisterPage", () => {
   });
 
   it("should handle successful registration", async () => {
-    (global.fetch as any).mockResolvedValue({
+    vi.mocked(global.fetch).mockResolvedValue({
       ok: true,
       json: async () => ({ id: "123", email: "test@example.com" }),
-    });
+    } as Response);
 
     render(<RegisterPage />);
 
@@ -60,10 +60,10 @@ describe("RegisterPage", () => {
   });
 
   it("should show error on failed registration", async () => {
-    (global.fetch as any).mockResolvedValue({
+    vi.mocked(global.fetch).mockResolvedValue({
       ok: false,
       json: async () => ({ error: "Email já cadastrado" }),
-    });
+    } as Response);
 
     render(<RegisterPage />);
 

@@ -1,15 +1,11 @@
 "use client";
 
 import { Plus } from "lucide-react";
-import { useState } from "react";
 
 export function AddHabitButton() {
-  const [isOpen, setIsOpen] = useState(false);
-
   // For now, this is a placeholder
   // Will be enhanced with a proper dialog/modal in the future
   function handleClick() {
-    setIsOpen(true);
     alert("Funcionalidade de adicionar hábito manual em desenvolvimento.\nPor enquanto, hábitos são criados automaticamente ao gerar um plano.");
   }
 

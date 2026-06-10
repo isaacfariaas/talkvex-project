@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { CheckCircle2, Circle } from "lucide-react";
 import confetti from "canvas-confetti";
 

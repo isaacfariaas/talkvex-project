@@ -26,7 +26,7 @@ describe("LoginPage", () => {
   it("should render login form", () => {
     render(<LoginPage />);
 
-    expect(screen.getByText("Entrar na sua conta")).toBeInTheDocument();
+    expect(screen.getByText(/Entrar na sua conta/)).toBeInTheDocument();
     expect(screen.getByLabelText(/email/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/senha/i)).toBeInTheDocument();
   });

@@ -50,10 +50,10 @@ describe("GET /api/reviews", () => {
     ];
 
     vi.mocked(requireAuth).mockResolvedValue({
-      session: { user: { id: "user-123" } } as any,
+      session: { user: { id: "user-123" } },
       response: null,
     });
-    vi.mocked(prisma.weeklyReview.findMany).mockResolvedValue(mockReviews as any);
+    vi.mocked(prisma.weeklyReview.findMany).mockResolvedValue(mockReviews as never);
 
     const response = await GET();
     const data = await response.json();
@@ -98,10 +98,10 @@ describe("POST /api/reviews", () => {
     };
 
     vi.mocked(requireAuth).mockResolvedValue({
-      session: { user: { id: "user-123" } } as any,
+      session: { user: { id: "user-123" } },
       response: null,
     });
-    vi.mocked(prisma.weeklyReview.create).mockResolvedValue(mockReview as any);
+    vi.mocked(prisma.weeklyReview.create).mockResolvedValue(mockReview as never);
 
     const request = new NextRequest("http://localhost/api/reviews", {
       method: "POST",
@@ -125,7 +125,7 @@ describe("POST /api/reviews", () => {
 
   it("should reject review with missing required fields", async () => {
     vi.mocked(requireAuth).mockResolvedValue({
-      session: { user: { id: "user-123" } } as any,
+      session: { user: { id: "user-123" } },
       response: null,
     });
 
@@ -146,7 +146,7 @@ describe("POST /api/reviews", () => {
 
   it("should reject review with invalid rating", async () => {
     vi.mocked(requireAuth).mockResolvedValue({
-      session: { user: { id: "user-123" } } as any,
+      session: { user: { id: "user-123" } },
       response: null,
     });
 

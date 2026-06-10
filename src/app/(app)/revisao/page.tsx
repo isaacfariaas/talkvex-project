@@ -48,6 +48,16 @@ interface Suggestions {
   motivationalMessage: string;
 }
 
+interface PastReview {
+  id: string;
+  weekStart: string;
+  weekEnd: string;
+  rating?: number;
+  wins?: string;
+  challenges?: string;
+  nextWeekPlan?: string;
+}
+
 export default function RevisaoPage() {
   const [step, setStep] = useState<ReviewStep>("select-goal");
   const [goals, setGoals] = useState<Goal[]>([]);
@@ -58,43 +68,42 @@ export default function RevisaoPage() {
   const [suggestions, setSuggestions] = useState<Suggestions | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [reviewId, setReviewId] = useState<string | null>(null);
-  const [pastReviews, setPastReviews] = useState<any[]>([]);
+  const [pastReviews, setPastReviews] = useState<PastReview[]>([]);
   const [loadingHistory, setLoadingHistory] = useState(false);
 
   useEffect(() => {
+    const loadGoals = async () => {
+      try {
+        const res = await fetch("/api/goals");
+        if (!res.ok) throw new Error("Erro ao carregar metas");
+        const data = await res.json();
+        setGoals(data);
+      } catch (err) {
+        console.error(err);
+        setError("Erro ao carregar metas");
+      }
+    };
+
+    const loadWeeklyMetrics = async () => {
+      try {
+        const res = await fetch("/api/metrics/weekly");
+        if (!res.ok) throw new Error("Erro ao carregar métricas");
+        const data = await res.json();
+        setMetrics({
+          habitsCompleted: data.habitsCompleted,
+          habitsTotal: data.habitsTotal,
+          tasksCompleted: data.tasksCompleted,
+          tasksTotal: data.tasksTotal,
+          currentStreak: data.currentStreak,
+        });
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
     loadGoals();
     loadWeeklyMetrics();
   }, []);
-
-  const loadGoals = async () => {
-    try {
-      const res = await fetch("/api/goals");
-      if (!res.ok) throw new Error("Erro ao carregar metas");
-      const data = await res.json();
-      setGoals(data);
-    } catch (err) {
-      console.error(err);
-      setError("Erro ao carregar metas");
-    }
-  };
-
-  const loadWeeklyMetrics = async () => {
-    try {
-      const res = await fetch("/api/metrics/weekly");
-      if (!res.ok) throw new Error("Erro ao carregar métricas");
-      const data = await res.json();
-      setMetrics({
-        habitsCompleted: data.habitsCompleted,
-        habitsTotal: data.habitsTotal,
-        tasksCompleted: data.tasksCompleted,
-        tasksTotal: data.tasksTotal,
-        currentStreak: data.currentStreak,
-      });
-    } catch (err) {
-      console.error(err);
-    }
-  };
 
   const openHistory = async () => {
     setLoadingHistory(true);
@@ -174,7 +183,6 @@ export default function RevisaoPage() {
 
       if (!res.ok) throw new Error("Erro ao salvar revisão");
       const review = await res.json();
-      setReviewId(review.id);
 
       const adjustRes = await fetch(`/api/reviews/${review.id}/adjust`, {
         method: "POST",
@@ -467,7 +475,7 @@ export default function RevisaoPage() {
 
           <div className="p-4 rounded-xl text-center" style={{ background: "hsl(var(--card))", borderColor: "hsl(var(--border))" }}>
             <p className="italic" style={{ color: "hsl(var(--muted-foreground))" }}>
-              "{suggestions.motivationalMessage}"
+              &ldquo;{suggestions.motivationalMessage}&rdquo;
             </p>
           </div>
         </div>

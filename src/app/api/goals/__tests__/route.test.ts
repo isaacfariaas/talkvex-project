@@ -36,10 +36,10 @@ describe("GET /api/goals", () => {
     ];
 
     vi.mocked(requireAuth).mockResolvedValue({
-      session: { user: { id: "user-123" } } as any,
+      session: { user: { id: "user-123" } },
       response: null,
     });
-    vi.mocked(prisma.goal.findMany).mockResolvedValue(mockGoals as any);
+    vi.mocked(prisma.goal.findMany).mockResolvedValue(mockGoals as never);
 
     const response = await GET();
     const data = await response.json();
@@ -80,10 +80,10 @@ describe("POST /api/goals", () => {
     };
 
     vi.mocked(requireAuth).mockResolvedValue({
-      session: { user: { id: "user-123" } } as any,
+      session: { user: { id: "user-123" } },
       response: null,
     });
-    vi.mocked(prisma.goal.create).mockResolvedValue(mockGoal as any);
+    vi.mocked(prisma.goal.create).mockResolvedValue(mockGoal as never);
 
     const request = new NextRequest("http://localhost/api/goals", {
       method: "POST",
@@ -104,7 +104,7 @@ describe("POST /api/goals", () => {
 
   it("should reject goal with invalid data", async () => {
     vi.mocked(requireAuth).mockResolvedValue({
-      session: { user: { id: "user-123" } } as any,
+      session: { user: { id: "user-123" } },
       response: null,
     });
 
@@ -125,7 +125,7 @@ describe("POST /api/goals", () => {
 
   it("should reject invalid JSON", async () => {
     vi.mocked(requireAuth).mockResolvedValue({
-      session: { user: { id: "user-123" } } as any,
+      session: { user: { id: "user-123" } },
       response: null,
     });
 

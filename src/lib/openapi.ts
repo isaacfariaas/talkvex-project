@@ -83,14 +83,14 @@ export const openApiSpec = {
   ],
   components: {
     schemas: {
-      Goal: zodToJsonSchema(goalSchema as any, "Goal"),
-      CreateGoal: zodToJsonSchema(createGoalSchema as any, "CreateGoal"),
-      UpdateGoal: zodToJsonSchema(updateGoalSchema as any, "UpdateGoal"),
-      Review: zodToJsonSchema(reviewSchema as any, "Review"),
-      CreateReview: zodToJsonSchema(createReviewSchema as any, "CreateReview"),
-      User: zodToJsonSchema(userSchema as any, "User"),
-      Register: zodToJsonSchema(registerSchema as any, "Register"),
-      Error: zodToJsonSchema(errorSchema as any, "Error"),
+      Goal: zodToJsonSchema(goalSchema as never, "Goal"),
+      CreateGoal: zodToJsonSchema(createGoalSchema as never, "CreateGoal"),
+      UpdateGoal: zodToJsonSchema(updateGoalSchema as never, "UpdateGoal"),
+      Review: zodToJsonSchema(reviewSchema as never, "Review"),
+      CreateReview: zodToJsonSchema(createReviewSchema as never, "CreateReview"),
+      User: zodToJsonSchema(userSchema as never, "User"),
+      Register: zodToJsonSchema(registerSchema as never, "Register"),
+      Error: zodToJsonSchema(errorSchema as never, "Error"),
     },
     securitySchemes: {
       cookieAuth: {

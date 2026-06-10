@@ -22,7 +22,6 @@ vi.mock("@/lib/api", async () => {
 
 import { prisma } from "@/lib/prisma";
 import { requireAuth } from "@/lib/api";
-import { NextResponse } from "next/server";
 
 describe("PATCH /api/daily/habits/[id]", () => {
   beforeEach(() => {
@@ -43,11 +42,11 @@ describe("PATCH /api/daily/habits/[id]", () => {
     const updatedHabit = { ...mockHabit, completed: true };
 
     vi.mocked(requireAuth).mockResolvedValue({
-      session: { user: { id: "user-123" } } as any,
+      session: { user: { id: "user-123" } },
       response: null,
     });
-    vi.mocked(prisma.dailyHabit.findUnique).mockResolvedValue(mockHabit as any);
-    vi.mocked(prisma.dailyHabit.update).mockResolvedValue(updatedHabit as any);
+    vi.mocked(prisma.dailyHabit.findUnique).mockResolvedValue(mockHabit as never);
+    vi.mocked(prisma.dailyHabit.update).mockResolvedValue(updatedHabit as never);
 
     const request = new NextRequest("http://localhost/api/daily/habits/habit-123", {
       method: "PATCH",
@@ -67,7 +66,7 @@ describe("PATCH /api/daily/habits/[id]", () => {
 
   it("should return 404 when habit not found", async () => {
     vi.mocked(requireAuth).mockResolvedValue({
-      session: { user: { id: "user-123" } } as any,
+      session: { user: { id: "user-123" } },
       response: null,
     });
     vi.mocked(prisma.dailyHabit.findUnique).mockResolvedValue(null);
@@ -96,10 +95,10 @@ describe("PATCH /api/daily/habits/[id]", () => {
     };
 
     vi.mocked(requireAuth).mockResolvedValue({
-      session: { user: { id: "user-123" } } as any,
+      session: { user: { id: "user-123" } },
       response: null,
     });
-    vi.mocked(prisma.dailyHabit.findUnique).mockResolvedValue(mockHabit as any);
+    vi.mocked(prisma.dailyHabit.findUnique).mockResolvedValue(mockHabit as never);
 
     const request = new NextRequest("http://localhost/api/daily/habits/habit-123", {
       method: "PATCH",
@@ -115,7 +114,7 @@ describe("PATCH /api/daily/habits/[id]", () => {
 
   it("should reject invalid JSON", async () => {
     vi.mocked(requireAuth).mockResolvedValue({
-      session: { user: { id: "user-123" } } as any,
+      session: { user: { id: "user-123" } },
       response: null,
     });
     vi.mocked(prisma.dailyHabit.findUnique).mockResolvedValue({
@@ -123,7 +122,7 @@ describe("PATCH /api/daily/habits/[id]", () => {
       weeklyTask: {
         milestone: { annualPlan: { userId: "user-123" } },
       },
-    } as any);
+    } as never);
 
     const request = new NextRequest("http://localhost/api/daily/habits/habit-123", {
       method: "PATCH",
