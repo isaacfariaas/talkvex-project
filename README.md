@@ -1,5 +1,8 @@
 # Sistema de Planejamento de Metas
 
+[![CI](https://github.com/isaacfariaas/talkvex-project/actions/workflows/ci.yml/badge.svg)](https://github.com/isaacfariaas/talkvex-project/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/isaacfariaas/talkvex-project/branch/main/graph/badge.svg)](https://codecov.io/gh/isaacfariaas/talkvex-project)
+
 Aplicação web para planejamento e acompanhamento de metas pessoais com suporte a IA.
 
 ## Stack
@@ -144,3 +147,47 @@ npx prisma migrate deploy
 | `GITHUB_SECRET`        | Client Secret para login com GitHub (opcional)         | Não         |
 | `GOOGLE_CLIENT_ID`     | Client ID para login com Google (opcional)             | Não         |
 | `GOOGLE_CLIENT_SECRET` | Client Secret para login com Google (opcional)         | Não         |
+
+---
+
+## CI/CD
+
+### Pipeline de Integração Contínua
+
+O projeto utiliza GitHub Actions para CI/CD com os seguintes jobs:
+
+- **Lint & Type Check**: Valida código com ESLint e TypeScript
+- **Build**: Compila a aplicação Next.js
+- **Tests**: Executa testes (atualmente desabilitado até implementação dos testes)
+
+### Configuração de Branch Protection
+
+Para garantir a qualidade do código, configure branch protection no GitHub:
+
+1. Acesse **Settings** → **Branches** → **Add rule**
+2. Configure para o branch `main`:
+   - ✅ Require a pull request before merging
+   - ✅ Require status checks to pass before merging
+     - Selecione: `Lint & Type Check`, `Build`
+   - ✅ Require branches to be up to date before merging
+   - ✅ Do not allow bypassing the above settings
+
+### Dependabot
+
+Dependabot está configurado para:
+- Atualizar dependências npm semanalmente (segundas-feiras)
+- Atualizar GitHub Actions semanalmente
+- Limite de 5 PRs abertos por vez
+- PRs rotulados automaticamente como `dependencies`
+
+### Codecov
+
+Para ativar a cobertura de código:
+
+1. Configure o repositório no [Codecov](https://codecov.io)
+2. Adicione `CODECOV_TOKEN` nos secrets do GitHub:
+   - **Settings** → **Secrets and variables** → **Actions** → **New repository secret**
+   - Nome: `CODECOV_TOKEN`
+   - Valor: token fornecido pelo Codecov
+
+3. Quando os testes forem implementados, o upload de coverage será automático
