@@ -138,6 +138,41 @@ curl -X POST http://localhost:3000/api/auth/callback/credentials \
 
 ---
 
+## Testes
+
+O projeto utiliza Vitest como test runner, com @testing-library para testes de componentes React.
+
+### Executar testes
+
+```bash
+# Rodar todos os testes
+npm test
+
+# Rodar testes com cobertura
+npm run test:coverage
+
+# Rodar testes com interface visual
+npm run test:ui
+```
+
+### Estrutura de testes
+
+- **API Routes**: Testes unitários para endpoints (`/api/*`)
+  - `/api/register` — validação de cadastro
+  - `/api/goals` — CRUD de metas
+  - `/api/daily/habits/[id]` — toggle de hábitos
+  - `/api/reviews` — criação e listagem de revisões
+
+- **Componentes**: Testes de renderização e interação
+  - `HabitsList` — exibição de hábitos
+  - `CalendarHeatmap` — calendário de consistência
+  - `AddHabitButton` — ação de adicionar hábito
+  - Formulários de login e registro
+
+### Cobertura de código
+
+O projeto está configurado para gerar relatórios de cobertura com threshold mínimo de 70% nas áreas testadas.
+
 ## Comandos úteis
 
 ```bash
