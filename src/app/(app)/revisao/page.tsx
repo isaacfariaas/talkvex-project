@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { ChevronRight, CheckCircle2, Loader2, TrendingUp, Calendar, Target } from "lucide-react";
 
-type ReviewStep = "select-goal" | "questions" | "metrics" | "adjustments" | "report";
+type ReviewStep = "select-goal" | "questions" | "metrics" | "adjustments" | "report" | "history";
 
 interface Goal {
   id: string;
@@ -59,6 +59,8 @@ export default function RevisaoPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [reviewId, setReviewId] = useState<string | null>(null);
+  const [pastReviews, setPastReviews] = useState<any[]>([]);
+  const [loadingHistory, setLoadingHistory] = useState(false);
 
   useEffect(() => {
     loadGoals();
@@ -98,6 +100,21 @@ export default function RevisaoPage() {
     } catch (err) {
       console.error(err);
     }
+  };
+
+  const openHistory = async () => {
+    setLoadingHistory(true);
+    try {
+      const res = await fetch("/api/reviews");
+      if (!res.ok) throw new Error("Erro ao carregar histórico");
+      const data = await res.json();
+      setPastReviews(data);
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setLoadingHistory(false);
+    }
+    setStep("history");
   };
 
   const startReview = async (goal: Goal) => {
@@ -252,6 +269,20 @@ export default function RevisaoPage() {
           </p>
         </div>
       )}
+
+      <button
+        onClick={openHistory}
+        disabled={loadingHistory}
+        className="w-full mt-4 py-3 rounded-lg font-medium border flex items-center justify-center gap-2 disabled:opacity-50"
+        style={{
+          background: "hsl(var(--background))",
+          borderColor: "hsl(var(--border))",
+          color: "hsl(var(--muted-foreground))",
+        }}
+      >
+        {loadingHistory ? <Loader2 size={16} className="animate-spin" /> : <Calendar size={16} />}
+        Ver Histórico de Revisões
+      </button>
     </div>
   );
 
@@ -535,12 +566,104 @@ export default function RevisaoPage() {
     </div>
   );
 
+  const renderHistory = () => (
+    <div className="space-y-4">
+      <div className="flex items-center gap-3 mb-6">
+        <button
+          onClick={() => setStep("select-goal")}
+          className="p-2 rounded-lg border"
+          style={{ background: "hsl(var(--card))", borderColor: "hsl(var(--border))" }}
+        >
+          <ChevronRight size={16} style={{ color: "hsl(var(--muted-foreground))", transform: "rotate(180deg)" }} />
+        </button>
+        <div>
+          <h2 className="text-xl font-bold" style={{ color: "hsl(var(--foreground))" }}>
+            Histórico de Revisões
+          </h2>
+          <p className="text-sm" style={{ color: "hsl(var(--muted-foreground))" }}>
+            Suas revisões semanais anteriores
+          </p>
+        </div>
+      </div>
+
+      {pastReviews.length === 0 ? (
+        <div className="text-center py-12 rounded-xl border" style={{ background: "hsl(var(--card))", borderColor: "hsl(var(--border))" }}>
+          <Calendar size={40} className="mx-auto mb-3" style={{ color: "hsl(var(--muted-foreground))" }} />
+          <p style={{ color: "hsl(var(--muted-foreground))" }}>Nenhuma revisão encontrada ainda</p>
+        </div>
+      ) : (
+        <div className="space-y-3">
+          {pastReviews.map((review) => {
+            const weekStart = new Date(review.weekStart);
+            const weekEnd = new Date(review.weekEnd);
+            return (
+              <div
+                key={review.id}
+                className="p-4 rounded-xl border"
+                style={{ background: "hsl(var(--card))", borderColor: "hsl(var(--border))" }}
+              >
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center gap-2">
+                    <Calendar size={16} style={{ color: "hsl(var(--accent))" }} />
+                    <span className="font-medium" style={{ color: "hsl(var(--foreground))" }}>
+                      {weekStart.toLocaleDateString("pt-BR", { day: "2-digit", month: "short" })} –{" "}
+                      {weekEnd.toLocaleDateString("pt-BR", { day: "2-digit", month: "short", year: "numeric" })}
+                    </span>
+                  </div>
+                  {review.rating && (
+                    <div className="flex items-center gap-1">
+                      <TrendingUp size={14} style={{ color: "hsl(var(--accent))" }} />
+                      <span className="text-sm font-medium" style={{ color: "hsl(var(--accent))" }}>
+                        {review.rating}/10
+                      </span>
+                    </div>
+                  )}
+                </div>
+                {review.wins && (
+                  <div className="mt-2">
+                    <span className="text-xs font-semibold uppercase tracking-wide" style={{ color: "hsl(var(--muted-foreground))" }}>
+                      Conquistas
+                    </span>
+                    <p className="text-sm mt-1 line-clamp-2" style={{ color: "hsl(var(--foreground))" }}>
+                      {review.wins}
+                    </p>
+                  </div>
+                )}
+                {review.nextWeekPlan && (
+                  <div className="mt-2">
+                    <span className="text-xs font-semibold uppercase tracking-wide" style={{ color: "hsl(var(--muted-foreground))" }}>
+                      Plano da Próxima Semana
+                    </span>
+                    <p className="text-sm mt-1 line-clamp-2" style={{ color: "hsl(var(--foreground))" }}>
+                      {review.nextWeekPlan}
+                    </p>
+                  </div>
+                )}
+                {review.challenges && (
+                  <div className="mt-2">
+                    <span className="text-xs font-semibold uppercase tracking-wide" style={{ color: "hsl(var(--muted-foreground))" }}>
+                      Desafios
+                    </span>
+                    <p className="text-sm mt-1 line-clamp-2" style={{ color: "hsl(var(--foreground))" }}>
+                      {review.challenges}
+                    </p>
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+
   return (
     <div className="px-4 md:px-8 py-6 md:py-8 max-w-2xl mx-auto">
       {step === "select-goal" && renderSelectGoal()}
       {step === "questions" && renderQuestions()}
       {step === "adjustments" && renderAdjustments()}
       {step === "report" && renderReport()}
+      {step === "history" && renderHistory()}
     </div>
   );
 }
