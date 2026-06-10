@@ -1,26 +1,106 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: 222 47% 7%;
+  --foreground: 210 40% 95%;
+  --card: 222 40% 11%;
+  --card-foreground: 210 40% 95%;
+  --border: 217 32% 20%;
+  --input: 217 32% 20%;
+  --primary: 226 100% 64%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 217 32% 17%;
+  --secondary-foreground: 210 40% 95%;
+  --muted: 217 32% 17%;
+  --muted-foreground: 215 20% 55%;
+  --accent: 262 83% 62%;
+  --accent-foreground: 0 0% 100%;
+  --success: 158 64% 42%;
+  --warning: 38 92% 50%;
+  --destructive: 0 72% 51%;
+  --ring: 226 100% 64%;
+  --radius: 0.5rem;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.light {
+  --background: 0 0% 100%;
+  --foreground: 222 47% 11%;
+  --card: 210 20% 98%;
+  --card-foreground: 222 47% 11%;
+  --border: 214 32% 91%;
+  --input: 214 32% 91%;
+  --primary: 226 100% 50%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 210 20% 94%;
+  --secondary-foreground: 222 47% 11%;
+  --muted: 210 20% 94%;
+  --muted-foreground: 215 16% 47%;
+  --accent: 262 83% 58%;
+  --accent-foreground: 0 0% 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+@theme inline {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-border: hsl(var(--border));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-success: hsl(var(--success));
+  --color-warning: hsl(var(--warning));
+  --color-destructive: hsl(var(--destructive));
+  --font-sans: 'Inter', system-ui, sans-serif;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: hsl(var(--background)); }
+::-webkit-scrollbar-thumb { background: hsl(var(--border)); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: hsl(var(--muted-foreground)); }
+
+/* Progress bar animation */
+@keyframes progress-fill {
+  from { width: 0%; }
+  to { width: var(--progress-width); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.4s ease-out forwards;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Tab indicator */
+.tab-active {
+  color: hsl(var(--primary));
+  border-bottom: 2px solid hsl(var(--primary));
 }
