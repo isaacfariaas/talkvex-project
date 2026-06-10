@@ -1,0 +1,57 @@
+TAL-79: Monitoramento de Estabilidade (Dia D)
+==============================================
+
+STATUS: ✅ CONCLUÍDO
+
+IMPLEMENTADO:
+-------------
+1. Script de monitoramento em tempo real (scripts/monitor-alpha-launch.sh)
+   - Verifica /api/health continuamente
+   - Mede latência e status HTTP
+   - Alertas coloridos (OK/SLOW/FAIL/ALERT)
+   - Logs estruturados com timestamp
+   - Métricas JSON exportadas
+
+2. Script de análise (scripts/analyze-monitoring-logs.sh)
+   - Calcula uptime, P50/P95/P99
+   - Distribuição de status HTTP
+   - Relatórios formatados
+
+3. Documentação completa
+   - docs/MONITORING.md (guia técnico completo)
+   - ALPHA-LAUNCH-QUICKSTART.md (início rápido)
+
+4. Script de inicialização (scripts/start-monitoring.sh)
+   - Verifica se servidor está rodando
+   - Inicia monitoramento automaticamente
+
+COMO USAR:
+----------
+# Método 1: Script de inicialização
+./scripts/start-monitoring.sh
+
+# Método 2: Monitor direto
+./scripts/monitor-alpha-launch.sh
+
+# Gerar relatório
+./scripts/analyze-monitoring-logs.sh
+
+MÉTRICAS TARGET:
+----------------
+- Uptime: > 99%
+- Latência P95: < 1000ms
+- Latência P99: < 2000ms
+- Taxa de erro: < 1%
+
+ARQUIVOS CRIADOS:
+-----------------
+✓ scripts/monitor-alpha-launch.sh
+✓ scripts/analyze-monitoring-logs.sh
+✓ scripts/start-monitoring.sh
+✓ docs/MONITORING.md
+✓ ALPHA-LAUNCH-QUICKSTART.md
+
+OBSERVAÇÃO:
+-----------
+Servidor Next.js não está rodando atualmente.
+Para testar: npm run dev
