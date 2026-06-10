@@ -2,6 +2,9 @@ import { handlers } from "@/lib/auth";
 import { NextRequest, NextResponse } from "next/server";
 import { checkRateLimit } from "@/lib/rate-limit";
 
+export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
+
 export const GET = handlers.GET;
 
 export async function POST(request: NextRequest) {
