@@ -2,6 +2,7 @@
 
 [![CI](https://github.com/isaacfariaas/talkvex-project/actions/workflows/ci.yml/badge.svg)](https://github.com/isaacfariaas/talkvex-project/actions/workflows/ci.yml)
 [![codecov](https://codecov.io/gh/isaacfariaas/talkvex-project/branch/main/graph/badge.svg)](https://codecov.io/gh/isaacfariaas/talkvex-project)
+[![API Docs](https://img.shields.io/badge/API-Documented-blue.svg)](http://localhost:3000/api/docs)
 
 Aplicação web para planejamento e acompanhamento de metas pessoais com suporte a IA.
 
@@ -92,13 +93,30 @@ docker compose exec app npx prisma migrate deploy
 
 ---
 
-## Endpoints da API
+## Documentação da API
+
+A documentação completa da API está disponível em uma interface interativa com suporte a testes em tempo real:
+
+**[📚 Acessar Documentação Interativa →](http://localhost:3000/api/docs)**
+
+A documentação inclui:
+- Especificação OpenAPI 3.1 completa
+- Todos os endpoints com request/response schemas
+- Exemplos de requisições e respostas
+- Códigos de erro e suas descrições
+- Interface para testar endpoints diretamente
+
+### Principais endpoints
 
 | Método | Rota                      | Descrição                    | Auth? |
 | ------ | ------------------------- | ---------------------------- | ----- |
 | POST   | `/api/auth/[...nextauth]` | Login via NextAuth.js        | Não   |
 | POST   | `/api/register`           | Cadastro de novo usuário     | Não   |
 | GET    | `/api/me`                 | Dados do usuário autenticado | Sim   |
+| GET    | `/api/goals`              | Listar metas                 | Sim   |
+| POST   | `/api/goals`              | Criar nova meta              | Sim   |
+| GET    | `/api/reviews`            | Listar revisões semanais     | Sim   |
+| POST   | `/api/reviews`            | Criar revisão semanal        | Sim   |
 
 ### Exemplo — Registro de usuário
 
