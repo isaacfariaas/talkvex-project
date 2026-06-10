@@ -191,11 +191,20 @@ export default async function HojePage() {
             className="rounded-xl border p-5 lg:col-span-2"
             style={{ background: "hsl(var(--card))", borderColor: "hsl(var(--border))" }}
           >
-            <h2 className="text-base font-semibold flex items-center gap-2 mb-4"
-              style={{ color: "hsl(var(--foreground))" }}>
-              <span style={{ color: "hsl(var(--success))" }}>✓</span>
-              Sua rotina de hoje
-            </h2>
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-base font-semibold flex items-center gap-2"
+                style={{ color: "hsl(var(--foreground))" }}>
+                <span style={{ color: "hsl(var(--success))" }}>✓</span>
+                Sua rotina de hoje
+              </h2>
+              <Link
+                href="/habitos"
+                className="text-xs font-medium flex items-center gap-1 transition-opacity hover:opacity-80"
+                style={{ color: "hsl(var(--primary))" }}
+              >
+                Ver histórico <ArrowRight size={12} />
+              </Link>
+            </div>
             <HabitsCard
               habits={habits.map((h) => ({
                 id: h.id,

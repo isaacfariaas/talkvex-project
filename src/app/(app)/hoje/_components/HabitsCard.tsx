@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { CheckCircle2, Circle } from "lucide-react";
+import confetti from "canvas-confetti";
 
 interface Habit {
   id: string;
@@ -12,15 +13,36 @@ interface Habit {
 
 export function HabitsCard({ habits: initial }: { habits: Habit[] }) {
   const [habits, setHabits] = useState(initial);
+  const [justCompleted, setJustCompleted] = useState<string | null>(null);
 
   async function toggle(id: string, completed: boolean) {
+    const newCompleted = !completed;
+
     setHabits((prev) =>
-      prev.map((h) => (h.id === id ? { ...h, completed: !completed } : h))
+      prev.map((h) => (h.id === id ? { ...h, completed: newCompleted } : h))
     );
+
+    if (newCompleted) {
+      setJustCompleted(id);
+      setTimeout(() => setJustCompleted(null), 600);
+
+      // Check if all habits are now completed
+      const willAllBeCompleted = habits.every((h) => h.id === id || h.completed);
+      if (willAllBeCompleted && habits.length > 0) {
+        // Fire confetti!
+        confetti({
+          particleCount: 100,
+          spread: 70,
+          origin: { y: 0.6 },
+          colors: ["#10b981", "#34d399", "#6ee7b7"],
+        });
+      }
+    }
+
     await fetch(`/api/daily/habits/${id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ completed: !completed }),
+      body: JSON.stringify({ completed: newCompleted }),
     });
   }
 
@@ -54,18 +76,23 @@ export function HabitsCard({ habits: initial }: { habits: Habit[] }) {
         <button
           key={habit.id}
           onClick={() => toggle(habit.id, habit.completed)}
-          className="w-full flex items-center gap-3 p-3 rounded-lg text-left transition-colors"
+          className="w-full flex items-center gap-3 p-3 rounded-lg text-left transition-all duration-300 hover:scale-[1.02]"
           style={{
             background: habit.completed ? "hsl(var(--success) / 0.1)" : "hsl(var(--secondary))",
+            transform: justCompleted === habit.id ? "scale(1.05)" : "scale(1)",
           }}
         >
           {habit.completed ? (
-            <CheckCircle2 size={18} style={{ color: "hsl(var(--success))", flexShrink: 0 }} />
+            <CheckCircle2
+              size={18}
+              style={{ color: "hsl(var(--success))", flexShrink: 0 }}
+              className={justCompleted === habit.id ? "animate-bounce" : ""}
+            />
           ) : (
             <Circle size={18} style={{ color: "hsl(var(--muted-foreground))", flexShrink: 0 }} />
           )}
           <span
-            className="text-sm font-medium"
+            className="text-sm font-medium transition-all duration-300"
             style={{
               color: habit.completed ? "hsl(var(--muted-foreground))" : "hsl(var(--foreground))",
               textDecoration: habit.completed ? "line-through" : "none",
