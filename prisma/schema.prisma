@@ -87,6 +87,7 @@ model Goal {
 
   user               User               @relation(fields: [userId], references: [id], onDelete: Cascade)
   annualPlans        AnnualPlan[]
+  weeklyReviews      WeeklyReview[]
   planGenerationLogs PlanGenerationLog[]
 
   @@map("goals")
@@ -161,16 +162,23 @@ model DailyHabit {
 model WeeklyReview {
   id           String   @id @default(cuid())
   userId       String
+  goalId       String?
   weekStart    DateTime
   weekEnd      DateTime
   wins         String?  @db.Text
   challenges   String?  @db.Text
   nextWeekPlan String?  @db.Text
   rating       Int?
+  questions    Json?
+  answers      Json?
+  metrics      Json?
+  suggestions  Json?
+  completed    Boolean  @default(false)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  goal Goal? @relation(fields: [goalId], references: [id], onDelete: SetNull)
 
   @@map("weekly_reviews")
 }
