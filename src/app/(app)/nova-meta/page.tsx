@@ -32,9 +32,17 @@ const LOADING_MESSAGES = [
 
 const PLACEHOLDERS = [
   "Ex: Quero me tornar Tech Lead em 12 meses.",
-  "Ex: Quero abrir minha clínica odontológica.",
-  "Ex: Quero lançar meu SaaS e chegar a R$5.000/mês.",
-  "Ex: Quero correr uma meia maratona.",
+  "Ex: Quero conseguir uma promoção para gerente até o final do ano.",
+  "Ex: Quero lançar meu SaaS e chegar a R$5.000/mês em receita recorrente.",
+  "Ex: Quero abrir minha clínica odontológica e atender 20 pacientes por semana.",
+  "Ex: Quero fazer uma transição de carreira para UX Design.",
+  "Ex: Quero correr uma meia maratona em menos de 2 horas.",
+  "Ex: Quero perder 10kg de forma saudável nos próximos 6 meses.",
+  "Ex: Quero economizar R$30.000 para dar entrada em um imóvel.",
+  "Ex: Quero quitar todas as minhas dívidas do cartão de crédito.",
+  "Ex: Quero concluir meu MBA em Gestão de Projetos.",
+  "Ex: Quero aprender inglês fluente e tirar certificação C1.",
+  "Ex: Quero melhorar meu relacionamento familiar dedicando mais tempo de qualidade.",
 ];
 
 export default function NovaMetaPage() {
@@ -45,7 +53,7 @@ export default function NovaMetaPage() {
   const [loading, setLoading] = useState(false);
   const [loadingMsgIdx, setLoadingMsgIdx] = useState(0);
   const [error, setError] = useState("");
-  const [placeholder] = useState(() => PLACEHOLDERS[Math.floor(Math.random() * PLACEHOLDERS.length)]);
+  const [placeholderIdx, setPlaceholderIdx] = useState(() => Math.floor(Math.random() * PLACEHOLDERS.length));
 
   useEffect(() => {
     if (!loading) return;
@@ -54,6 +62,13 @@ export default function NovaMetaPage() {
     }, 2000);
     return () => clearInterval(interval);
   }, [loading]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setPlaceholderIdx((i) => (i + 1) % PLACEHOLDERS.length);
+    }, 3500);
+    return () => clearInterval(interval);
+  }, []);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -196,7 +211,7 @@ export default function NovaMetaPage() {
             <textarea
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              placeholder={placeholder}
+              placeholder={PLACEHOLDERS[placeholderIdx]}
               rows={3}
               required
               className="w-full px-4 py-3 rounded-lg text-sm resize-none outline-none transition-all"
