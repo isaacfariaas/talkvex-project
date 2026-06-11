@@ -4,12 +4,14 @@ FROM base AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 COPY package.json package-lock.json* ./
-RUN npm ci
+RUN npm install --legacy-peer-deps
 
 FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+ARG DATABASE_URL="postgresql://postgres:postgres@db:5432/metas_db?schema=public"
+ENV DATABASE_URL=$DATABASE_URL
 RUN npx prisma generate
 RUN npm run build
 
@@ -25,6 +27,9 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 COPY --from=builder /app/prisma ./prisma
 COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
+
+# NextAuth v4 assertConfig checks for this file at runtime in the cwd
+RUN mkdir -p pages/api/auth && printf '// stub\n' > "pages/api/auth/[...nextauth].ts"
 
 USER nextjs
 EXPOSE 3000

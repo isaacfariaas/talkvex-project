@@ -16,6 +16,19 @@ services:
       timeout: 5s
       retries: 5
 
+  migrate:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: builder
+    command: sh -c "npx prisma migrate deploy"
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@db:5432/metas_db?schema=public
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: "no"
+
   app:
     build:
       context: .
@@ -25,12 +38,14 @@ services:
       - "3000:3000"
     environment:
       DATABASE_URL: postgresql://postgres:postgres@db:5432/metas_db?schema=public
-      NEXTAUTH_URL: http://localhost:3000
+      NEXTAUTH_URL: ${NEXTAUTH_URL:-http://localhost:3000}
       NEXTAUTH_SECRET: ${NEXTAUTH_SECRET:-change-me-in-production}
       NODE_ENV: production
     depends_on:
       db:
         condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
 
 volumes:
   postgres_data:
