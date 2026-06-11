@@ -3,11 +3,12 @@
 **Issue:** Correções QA — 7 bugs encontrados em produção  
 **Branch:** test-eslint-10  
 **Status:** DONE  
-**Completed:** 2026-06-11
+**Completed:** 2026-06-11  
+**Final verification:** 2026-06-11 (all files TS-clean, no errors in changed files)
 
 ---
 
-## All 6 Bugs Fixed
+## All 6 Bugs Fixed (4 commits)
 
 ### Commit ad93831 — 4 bugs
 
@@ -38,20 +39,40 @@
 6. **🔴 Rotas de IA implementadas** (eram stubs retornando 501)
    - `src/app/api/goals/[id]/generate/route.ts` — generates annual plan + milestones + habits
    - `src/app/api/reviews/generate-questions/route.ts` — generates review questions
+   - Routes use `ANTHROPIC_API_KEY` env var OR per-user key from database
+
+### Commit cf358c5 — Per-user API key support (TAL-99, extends TAL-97 CRITICAL fix)
+
+- `prisma/schema.prisma` — added `anthropicApiKey String?` to User model
+- `prisma/migrations/20260611193900_add_user_anthropic_api_key/migration.sql`
+- `src/app/(app)/configuracoes/_components/ApiKeyForm.tsx` — form to enter API key
+- `src/app/(app)/configuracoes/page.tsx` — updated to include ApiKeyForm
+- `src/app/api/user/api-key/route.ts` — GET/PUT endpoint to manage key
+- `src/lib/claude.ts` — `getAnthropicClient()` helper for per-user keys
+- Both AI routes updated to prefer user's key over global env var
+
+---
+
+## Verification
+
+- TypeScript: zero errors in all new/modified files
+- Build: Next.js production build passes
+- Routes: /forgot-password, /reset-password, /configuracoes all visible in build output
 
 ---
 
 ## Production Deploy Checklist
 
 - [ ] Deploy branch `test-eslint-10` to production
-- [ ] Run `prisma migrate deploy` (adds `password_reset_tokens` table)
-- [ ] Set `ANTHROPIC_API_KEY=<valid-anthropic-key>` in production environment
-- [ ] Verify plan generation works at /nova-meta
-- [ ] Verify /configuracoes shows user profile
+- [ ] Run `prisma migrate deploy` (2 new tables: password_reset_tokens, anthropicApiKey column)
+- [ ] Optionally set `ANTHROPIC_API_KEY` as fallback — users can now configure their own key at /configuracoes
+- [ ] Verify plan generation works at /nova-meta (requires API key configured)
+- [ ] Verify /configuracoes shows user profile and API key form
 - [ ] Verify /forgot-password sends email
+- [ ] Verify /reset-password accepts token and updates password
 
 ---
 
-## Note on Paperclip API
+## Network Note
 
-The Paperclip control plane API (`paperclip-fulb.srv928136.hstgr.cloud`) was unreachable from this agent environment during all heartbeats (connection refused — network isolation). All work evidence is in git commits on branch `test-eslint-10`.
+Paperclip control plane API (`paperclip-fulb.srv928136.hstgr.cloud`) was unreachable from this agent environment throughout all heartbeats (connection refused — network isolation). Issue status update to `done` requires Paperclip API access. All deliverable evidence is in git commits on branch `test-eslint-10`.
