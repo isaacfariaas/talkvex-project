@@ -63,15 +63,21 @@ export async function POST(
   const { session, response } = await requireAuth();
   if (!session) return response!;
 
-  const apiKey = process.env.ANTHROPIC_API_KEY;
-  if (!apiKey) {
-    return err("Geração de planos via IA está desabilitada.", 501);
-  }
-
   const { id } = await params;
   const goal = await prisma.goal.findUnique({ where: { id } });
   if (!goal) return err("Meta não encontrada", 404);
   if (goal.userId !== session.user.id) return err("Não autorizado", 403);
+
+  // Fetch user's API key
+  const user = await prisma.user.findUnique({
+    where: { id: session.user.id },
+    select: { anthropicApiKey: true },
+  });
+
+  const apiKey = user?.anthropicApiKey || process.env.ANTHROPIC_API_KEY;
+  if (!apiKey) {
+    return err("Chave API do Anthropic não configurada. Configure em /configuracoes", 501);
+  }
 
   let body: unknown;
   try {
@@ -99,6 +105,7 @@ export async function POST(
     userPrompt,
     session.user.id,
     goal.id,
+    apiKey,
   );
 
   const plan = planResult.data;
@@ -143,6 +150,7 @@ export async function POST(
         weeklyPrompt,
         session.user.id,
         goal.id,
+        apiKey,
       );
 
       await Promise.all(
@@ -175,6 +183,7 @@ export async function POST(
       habitsPrompt,
       session.user.id,
       goal.id,
+      apiKey,
     );
 
     // Create daily habits for the next 7 days

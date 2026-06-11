@@ -24,9 +24,15 @@ export async function POST(req: NextRequest) {
   const { session, response } = await requireAuth();
   if (!session) return response!;
 
-  const apiKey = process.env.ANTHROPIC_API_KEY;
+  // Fetch user's API key
+  const user = await prisma.user.findUnique({
+    where: { id: session.user.id },
+    select: { anthropicApiKey: true },
+  });
+
+  const apiKey = user?.anthropicApiKey || process.env.ANTHROPIC_API_KEY;
   if (!apiKey) {
-    return err("Geração de perguntas via IA está desabilitada.", 501);
+    return err("Chave API do Anthropic não configurada. Configure em /configuracoes", 501);
   }
 
   let body: unknown;
@@ -62,6 +68,7 @@ export async function POST(req: NextRequest) {
     userPrompt,
     session.user.id,
     parsed.data.goalId ?? null,
+    apiKey,
   );
 
   return ok({ questions: result.data.questions });

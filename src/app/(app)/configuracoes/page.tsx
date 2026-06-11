@@ -1,5 +1,6 @@
 import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
+import { ApiKeyForm } from "./_components/ApiKeyForm";
 import { User, Mail } from "lucide-react";
 
 export default async function ConfiguracoesPage() {
@@ -16,7 +17,7 @@ export default async function ConfiguracoesPage() {
           Configurações
         </h1>
         <p className="text-sm" style={{ color: "hsl(var(--muted-foreground))" }}>
-          Gerencie suas informações de perfil
+          Gerencie suas informações de perfil e preferências
         </p>
       </div>
 
@@ -56,18 +57,8 @@ export default async function ConfiguracoesPage() {
         </div>
       </div>
 
-      {/* Placeholder for future features */}
-      <div
-        className="rounded-xl border p-6"
-        style={{ background: "hsl(var(--card))", borderColor: "hsl(var(--border))" }}
-      >
-        <h2 className="text-lg font-semibold mb-2" style={{ color: "hsl(var(--foreground))" }}>
-          Preferências
-        </h2>
-        <p className="text-sm" style={{ color: "hsl(var(--muted-foreground))" }}>
-          Funcionalidades adicionais de configuração serão adicionadas em breve.
-        </p>
-      </div>
+      {/* API Key Configuration */}
+      <ApiKeyForm />
     </div>
   );
 }
