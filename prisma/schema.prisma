@@ -200,6 +200,22 @@ model PlanGenerationLog {
   @@map("plan_generation_logs")
 }
 
+model Waitlist {
+  id               String    @id @default(cuid())
+  name             String
+  email            String    @unique
+  earlyAdopterCode String    @unique
+  launchEmailSent  Boolean   @default(false)
+  launchEmailSentAt DateTime?
+  registeredAt     DateTime?
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+
+  @@map("waitlist")
+  @@index([email])
+  @@index([earlyAdopterCode])
+}
+
 enum GoalStatus {
   ACTIVE
   COMPLETED
