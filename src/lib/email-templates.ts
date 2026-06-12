@@ -206,3 +206,61 @@ export function welcomeEmail(params: { name: string; email: string }): EmailTemp
 
   return { subject, html, text };
 }
+
+export interface PasswordResetParams {
+  name: string;
+  resetUrl: string;
+}
+
+export function passwordResetEmail(params: PasswordResetParams): EmailTemplate {
+  const { name, resetUrl } = params;
+  const subject = 'Redefinição de senha — Talkvex';
+
+  const html = `
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redefinição de senha</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f5f5f5;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #f5f5f5; padding: 40px 20px;">
+    <tr>
+      <td align="center">
+        <table width="600" cellpadding="0" cellspacing="0" style="background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+          <tr>
+            <td style="padding: 40px 40px 20px; text-align: center; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 8px 8px 0 0;">
+              <h1 style="margin: 0; color: #ffffff; font-size: 32px; font-weight: 700;">Talkvex</h1>
+              <p style="margin: 10px 0 0; color: #ffffff; font-size: 16px; opacity: 0.9;">Redefinição de senha</p>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding: 40px;">
+              <p style="margin: 0 0 20px; color: #333333; font-size: 16px;">Olá <strong>${name}</strong>!</p>
+              <p style="margin: 0 0 20px; color: #333333; font-size: 16px;">Recebemos uma solicitação para redefinir a senha da sua conta.</p>
+              <p style="margin: 0 0 30px; color: #333333; font-size: 16px;">Clique no botão abaixo para criar uma nova senha. O link expira em 1 hora.</p>
+              <table cellpadding="0" cellspacing="0" style="margin: 0 auto 30px;">
+                <tr>
+                  <td style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 6px; padding: 0;">
+                    <a href="${resetUrl}" style="display: block; padding: 14px 32px; color: #ffffff; font-size: 16px; font-weight: 600; text-decoration: none;">Redefinir senha</a>
+                  </td>
+                </tr>
+              </table>
+              <p style="margin: 0 0 10px; color: #666666; font-size: 14px;">Ou copie e cole o link no seu navegador:</p>
+              <p style="margin: 0 0 30px; color: #667eea; font-size: 14px; word-break: break-all;">${resetUrl}</p>
+              <p style="margin: 0; color: #999999; font-size: 13px;">Se você não solicitou a redefinição de senha, ignore este email — sua conta continua segura.</p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
+  `.trim();
+
+  const text = `Olá ${name}!\n\nRecebemos uma solicitação para redefinir a senha da sua conta.\n\nClique no link abaixo para criar uma nova senha (expira em 1 hora):\n${resetUrl}\n\nSe você não solicitou a redefinição de senha, ignore este email.\n\nEquipe Talkvex`;
+
+  return { subject, html, text };
+}

@@ -19,5 +19,6 @@ export const config = {
     "/revisao",
     "/nova-meta",
     "/chat",
+    "/configuracoes",
   ],
 };

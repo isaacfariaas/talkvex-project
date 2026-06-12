@@ -55,6 +55,7 @@ export default function RegisterPage() {
             <input
               id="name"
               type="text"
+              required
               value={name}
               onChange={(e) => setName(e.target.value)}
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"

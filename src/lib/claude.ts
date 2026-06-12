@@ -7,6 +7,12 @@ export const anthropic = new Anthropic({
 
 export const CLAUDE_MODEL = "claude-sonnet-4-6";
 
+export function getAnthropicClient(userApiKey?: string | null): Anthropic {
+  const key = userApiKey || process.env.ANTHROPIC_API_KEY;
+  if (!key) throw new Error("No Anthropic API key configured");
+  return new Anthropic({ apiKey: key });
+}
+
 const MAX_RETRIES = 3;
 const RETRY_DELAY_MS = 1000;
 
@@ -25,12 +31,14 @@ export async function generateWithRetry<T>(
   userMessage: string,
   userId: string,
   goalId: string | null,
+  userApiKey?: string | null,
 ): Promise<GenerationResult<T>> {
   let lastError: Error | null = null;
+  const client = getAnthropicClient(userApiKey);
 
   for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
     try {
-      const response = await anthropic.messages.create({
+      const response = await client.messages.create({
         model: CLAUDE_MODEL,
         max_tokens: 8192,
         system: [

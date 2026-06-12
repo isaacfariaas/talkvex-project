@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { logger } from "@/lib/logger";
 
 export class ApiError extends Error {
   constructor(
@@ -11,8 +12,12 @@ export class ApiError extends Error {
   }
 }
 
-export function handleApiError(error: unknown) {
-  console.error("API Error:", error);
+export function handleApiError(error: unknown, context?: Record<string, unknown>) {
+  if (error instanceof ApiError && error.statusCode < 500) {
+    logger.warn("API client error", { statusCode: error.statusCode, message: error.message, ...context });
+  } else {
+    logger.error("API error", error, context);
+  }
 
   if (error instanceof ApiError) {
     const response: { error: string; details?: unknown } = {
