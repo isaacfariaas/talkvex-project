@@ -2,6 +2,7 @@ import { getServerSession, type NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import { prisma } from "./prisma";
+import { loginRateLimiter } from "./ratelimit";
 
 export const authOptions: NextAuthOptions = {
   session: { strategy: "jwt" },
@@ -15,8 +16,15 @@ export const authOptions: NextAuthOptions = {
         email: { label: "Email", type: "email" },
         password: { label: "Senha", type: "password" },
       },
-      async authorize(credentials) {
+      async authorize(credentials, req) {
         if (!credentials?.email || !credentials?.password) return null;
+
+        // Proteção contra brute-force
+        const ip = (req?.headers as any)?.["x-forwarded-for"]?.split(",")[0] || "127.0.0.1";
+        const { success } = await loginRateLimiter.limit(ip);
+        if (!success) {
+          throw new Error("Muitas tentativas de login. Tente novamente em alguns minutos.");
+        }
 
         const user = await prisma.user.findUnique({
           where: { email: credentials.email as string },
@@ -50,5 +58,12 @@ export const authOptions: NextAuthOptions = {
 };
 
 export async function auth() {
-  return getServerSession(authOptions);
+  try {
+    const session = await getServerSession(authOptions);
+    return session;
+  } catch (error) {
+    console.error("[auth] getServerSession failed:", error);
+    // Return null on error to allow unauthenticated access instead of crashing
+    return null;
+  }
 }
