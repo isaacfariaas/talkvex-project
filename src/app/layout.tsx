@@ -11,6 +11,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Force rebuild
   return (
     <html lang="pt-BR" className="h-full">
       <body className="min-h-full flex flex-col">{children}</body>

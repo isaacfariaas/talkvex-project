@@ -12,9 +12,8 @@ const updateGoalSchema = z.object({
 });
 
 async function getGoalOrFail(id: string, userId: string) {
-  const goal = await prisma.goal.findUnique({ where: { id } });
-  if (!goal) return { goal: null, error: err("Meta não encontrada", 404) };
-  if (goal.userId !== userId) return { goal: null, error: err("Não autorizado", 403) };
+  const goal = await prisma.goal.findFirst({ where: { id, userId } });
+  if (!goal) return { goal: null, error: err("Meta não encontrada ou não autorizada", 404) };
   return { goal, error: null };
 }
 
@@ -29,8 +28,8 @@ export async function GET(
   const { goal, error } = await getGoalOrFail(id, session.user.id);
   if (!goal) return error!;
 
-  const fullGoal = await prisma.goal.findUnique({
-    where: { id },
+  const fullGoal = await prisma.goal.findFirst({
+    where: { id, userId: session.user.id },
     include: {
       annualPlans: {
         include: {

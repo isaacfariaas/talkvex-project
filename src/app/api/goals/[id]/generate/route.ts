@@ -3,6 +3,7 @@ import { z } from "zod";
 import { prisma } from "@/lib/prisma";
 import { ok, err, requireAuth } from "@/lib/api";
 import { generateWithRetry } from "@/lib/claude";
+import { decrypt } from "@/lib/crypto";
 import {
   SYSTEM_ANNUAL_PLAN,
   SYSTEM_WEEKLY_TASKS,
@@ -74,7 +75,7 @@ export async function POST(
     select: { anthropicApiKey: true },
   });
 
-  const apiKey = user?.anthropicApiKey || process.env.ANTHROPIC_API_KEY;
+  const apiKey = user?.anthropicApiKey ? decrypt(user.anthropicApiKey) : process.env.ANTHROPIC_API_KEY;
   if (!apiKey) {
     return err("Chave API do Anthropic não configurada. Configure em /configuracoes", 501);
   }

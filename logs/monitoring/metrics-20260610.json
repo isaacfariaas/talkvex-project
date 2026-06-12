@@ -1,0 +1,6 @@
+{"timestamp":"2026-06-10T21:31:09-03:00","endpoint":"/api/health","http_code":200,"response_time_ms":241,"status":"ok"}
+{"timestamp":"2026-06-10T21:34:45-03:00","endpoint":"/api/health","http_code":200,"response_time_ms":464,"status":"wrong_server","note":"Vite SPA catchall"}
+{"timestamp":"2026-06-10T21:34:46-03:00","endpoint":"/api/docs","http_code":200,"response_time_ms":377,"status":"wrong_server","note":"Vite SPA catchall"}
+{"timestamp":"2026-06-10T21:34:47-03:00","endpoint":"/api/goals","http_code":200,"response_time_ms":234,"status":"wrong_server","note":"Vite SPA catchall"}
+{"timestamp":"2026-06-10T21:34:48-03:00","endpoint":"/api/daily/today","http_code":200,"response_time_ms":246,"status":"wrong_server","note":"Vite SPA catchall"}
+{"timestamp":"2026-06-10T21:55:50-03:00","endpoint":"/api/metrics/weekly","http_code":200,"response_time_ms":2595,"status":"wrong_server","note":"Vite SPA catchall"}

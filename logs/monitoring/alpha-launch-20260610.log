@@ -1,0 +1,51 @@
+[2026-06-10T21:31:09-03:00] [SNAPSHOT] === Alpha Launch System State Snapshot ===
+[2026-06-10T21:31:09-03:00] [CHECK] Testing health endpoint: http://localhost:3000/api/health
+[2026-06-10T21:31:09-03:00] [OK] Health: HTTP 200 | 241ms | <!doctype html>
+<html lang="pt-BR">
+  <head>
+    <script type="module" src="/@vite/client"></script>
+
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Talkvex | Da meta à rotina, com IA</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+[2026-06-10T21:31:09-03:00] [INFO] Disk: Size:48G Used:13G Avail:36G Use%:26%
+[2026-06-10T21:31:09-03:00] [INFO] node_modules: size= binaries=0
+[2026-06-10T21:31:09-03:00] [INFO] Production build: no
+[2026-06-10T21:31:09-03:00] [SNAPSHOT] === End Snapshot ===
+[2026-06-10T21:34:43-03:00] [MONITOR] === FULL SYSTEM SWEEP START ===
+[2026-06-10T21:34:44-03:00] [MONITOR] --- Endpoint Response Check ---
+[2026-06-10T21:34:45-03:00] [WARN] EP /api/health: HTTP 200 | 464ms | WRONG: returning HTML (Vite SPA catchall)
+[2026-06-10T21:34:46-03:00] [WARN] EP /api/docs: HTTP 200 | 377ms | WRONG: returning HTML (Vite SPA catchall)
+[2026-06-10T21:34:47-03:00] [WARN] EP /api/goals: HTTP 200 | 234ms | WRONG: returning HTML (Vite SPA catchall)
+[2026-06-10T21:34:48-03:00] [WARN] EP /api/daily/today: HTTP 200 | 246ms | WRONG: returning HTML (Vite SPA catchall)
+[2026-06-10T21:55:49-03:00] [WARN] EP /api/metrics/weekly: HTTP 200 | 2595ms | WRONG: returning HTML (Vite SPA catchall)
+[2026-06-10T21:55:50-03:00] [MONITOR] --- Server Identification ---
+[2026-06-10T21:55:52-03:00] [WARN] Server: Vite dev server detected on port 3000 (NOT Next.js!)
+[2026-06-10T21:55:52-03:00] [INFO] Next.js static assets: HTTP 200
+[2026-06-10T21:55:53-03:00] [MONITOR] --- Port Availability ---
+[2026-06-10T21:55:53-03:00] [INFO] Port 3000: HTTP 200 (service running)
+[2026-06-10T21:55:55-03:00] [MONITOR] --- File System Status ---
+[2026-06-10T21:55:55-03:00] [INFO] Disk: Size:48G Used:13G Avail:36G Use%:26%
+[2026-06-10T21:55:55-03:00] [INFO] node_modules binaries: 0 (0=incomplete install)
+[2026-06-10T21:55:55-03:00] [INFO] Production build (.next/BUILD_ID): MISSING
+[2026-06-10T21:55:55-03:00] [INFO] Database schema: OK
+[2026-06-10T21:55:55-03:00] [INFO] Environment config: EXISTS
+[2026-06-10T21:55:55-03:00] [MONITOR] --- Recent Code Changes (last 24h) ---
+[2026-06-10T21:55:56-03:00] [INFO] Modified: src/types/next-auth.d.ts
+[2026-06-10T21:55:56-03:00] [INFO] Modified: src/__tests__/streak.test.ts
+[2026-06-10T21:55:56-03:00] [INFO] Modified: src/__tests__/plan.test.ts
+[2026-06-10T21:55:56-03:00] [INFO] Modified: src/lib/email-templates.ts
+[2026-06-10T21:55:56-03:00] [INFO] Modified: src/lib/claude.ts
+[2026-06-10T21:55:56-03:00] [INFO] Modified: src/lib/api-errors.ts
+[2026-06-10T21:55:56-03:00] [INFO] Modified: src/lib/auth.ts
+[2026-06-10T21:55:56-03:00] [INFO] Modified: src/lib/email-service.ts
+[2026-06-10T21:55:56-03:00] [INFO] Modified: src/lib/rate-limit.ts
+[2026-06-10T21:55:57-03:00] [INFO] Modified: src/lib/api.ts
+[2026-06-10T21:55:57-03:00] [MONITOR] === FULL SYSTEM SWEEP END ===
