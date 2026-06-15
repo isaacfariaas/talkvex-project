@@ -3,6 +3,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import { prisma } from "./prisma";
 import { loginRateLimiter } from "./ratelimit";
+import { verifyMFAToken } from "./mfa";
 
 export const authOptions: NextAuthOptions = {
   session: { strategy: "jwt" },
@@ -15,6 +16,7 @@ export const authOptions: NextAuthOptions = {
       credentials: {
         email: { label: "Email", type: "email" },
         password: { label: "Senha", type: "password" },
+        mfaToken: { label: "MFA Token", type: "text" },
       },
       async authorize(credentials, req) {
         if (!credentials?.email || !credentials?.password) return null;
@@ -28,6 +30,14 @@ export const authOptions: NextAuthOptions = {
 
         const user = await prisma.user.findUnique({
           where: { email: credentials.email as string },
+          select: {
+            id: true,
+            email: true,
+            name: true,
+            password: true,
+            mfaEnabled: true,
+            mfaSecret: true,
+          },
         });
 
         if (!user || !user.password) return null;
@@ -38,6 +48,23 @@ export const authOptions: NextAuthOptions = {
         );
 
         if (!passwordMatch) return null;
+
+        // Check MFA if enabled
+        if (user.mfaEnabled) {
+          if (!credentials.mfaToken) {
+            throw new Error("MFA_REQUIRED");
+          }
+
+          if (!user.mfaSecret) {
+            throw new Error("MFA configurado incorretamente. Contate o suporte.");
+          }
+
+          const mfaValid = verifyMFAToken(user.mfaSecret, credentials.mfaToken);
+
+          if (!mfaValid) {
+            throw new Error("Token MFA inválido.");
+          }
+        }
 
         return { id: user.id, email: user.email, name: user.name };
       },

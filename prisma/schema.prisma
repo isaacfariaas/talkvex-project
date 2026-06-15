@@ -62,15 +62,23 @@ model User {
   image           String?
   password        String?
   anthropicApiKey String?
+  referralCode    String?   @unique
+  referredBy      String?
+  proExpiresAt    DateTime?
+  mfaEnabled      Boolean   @default(false)
+  mfaSecret       String?
   createdAt       DateTime  @default(now())
   updatedAt       DateTime  @updatedAt
 
-  accounts      Account[]
-  sessions      Session[]
-  goals         Goal[]
-  annualPlans   AnnualPlan[]
-  weeklyReviews WeeklyReview[]
-  planGenLogs   PlanGenerationLog[]
+  accounts         Account[]
+  sessions         Session[]
+  goals            Goal[]
+  annualPlans      AnnualPlan[]
+  weeklyReviews    WeeklyReview[]
+  planGenLogs      PlanGenerationLog[]
+  referralsGiven   Referral[]        @relation("Referrer")
+  referralsReceived Referral[]       @relation("Referred")
+  referralRewards  ReferralReward[]
 
   @@map("users")
 }
@@ -228,9 +236,45 @@ model Waitlist {
   @@index([earlyAdopterCode])
 }
 
+model Referral {
+  id              String   @id @default(cuid())
+  referrerId      String
+  referredUserId  String
+  convertedAt     DateTime?
+  rewardGrantedAt DateTime?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  referrer     User @relation("Referrer", fields: [referrerId], references: [id], onDelete: Cascade)
+  referredUser User @relation("Referred", fields: [referredUserId], references: [id], onDelete: Cascade)
+
+  @@unique([referrerId, referredUserId])
+  @@map("referrals")
+}
+
+model ReferralReward {
+  id          String       @id @default(cuid())
+  userId      String
+  type        RewardType
+  description String
+  grantedAt   DateTime     @default(now())
+  expiresAt   DateTime?
+  createdAt   DateTime     @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("referral_rewards")
+}
+
 enum GoalStatus {
   ACTIVE
   COMPLETED
   PAUSED
   CANCELLED
+}
+
+enum RewardType {
+  PRO_TRIAL
+  PRO_MONTH
+  FOUNDING_MENTOR_BADGE
 }
