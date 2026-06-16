@@ -8,6 +8,22 @@ const apiKeySchema = z.object({
   anthropicApiKey: z.string().optional(),
 });
 
+/**
+ * Masks an API key for secure display.
+ * Returns format: "sk-ant...last4" or similar prefix...suffix format
+ */
+function maskApiKey(key: string): string {
+  if (!key || key.length < 8) return "***";
+
+  const prefixLength = Math.min(7, Math.floor(key.length * 0.2));
+  const suffixLength = 4;
+
+  const prefix = key.slice(0, prefixLength);
+  const suffix = key.slice(-suffixLength);
+
+  return `${prefix}...${suffix}`;
+}
+
 export async function GET() {
   const { session, response } = await requireAuth();
   if (!session) return response!;
@@ -17,9 +33,12 @@ export async function GET() {
     select: { anthropicApiKey: true },
   });
 
+  const hasApiKey = !!user?.anthropicApiKey;
+  const maskedKey = hasApiKey ? maskApiKey(decrypt(user.anthropicApiKey!)) : null;
+
   return ok({
-    anthropicApiKey: user?.anthropicApiKey ? decrypt(user.anthropicApiKey) : null,
-    hasApiKey: !!user?.anthropicApiKey,
+    anthropicApiKey: maskedKey,
+    hasApiKey,
   });
 }
 

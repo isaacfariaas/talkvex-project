@@ -71,10 +71,10 @@ export default async function PlanoPage({
     );
   }
 
-  const allTasks = annualPlan.milestones.flatMap((m) => m.weeklyTasks);
+  const allTasks = annualPlan.milestones.flatMap((m: any) => m.weeklyTasks);
   const progress =
     allTasks.length > 0
-      ? Math.round((allTasks.filter((t) => t.completed).length / allTasks.length) * 100)
+      ? Math.round((allTasks.filter((t: any) => t.completed).length / allTasks.length) * 100)
       : 0;
 
   // Serialize dates to strings for client components
@@ -83,20 +83,20 @@ export default async function PlanoPage({
     title: annualPlan.title,
     summary: annualPlan.summary,
     year: annualPlan.year,
-    milestones: annualPlan.milestones.map((m) => ({
+    milestones: annualPlan.milestones.map((m: any) => ({
       id: m.id,
       quarter: m.quarter,
       title: m.title,
       description: m.description,
       targetDate: m.targetDate?.toISOString() ?? null,
       completed: m.completed,
-      weeklyTasks: m.weeklyTasks.map((t) => ({
+      weeklyTasks: m.weeklyTasks.map((t: any) => ({
         id: t.id,
         title: t.title,
         description: t.description,
         weekStart: t.weekStart.toISOString(),
         completed: t.completed,
-        dailyHabits: t.dailyHabits.map((h) => ({
+        dailyHabits: t.dailyHabits.map((h: any) => ({
           id: h.id,
           title: h.title,
           completed: h.completed,

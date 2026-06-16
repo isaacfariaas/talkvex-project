@@ -1,22 +1,17 @@
 import Link from "next/link";
+import styles from "./page.module.css";
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Talkvex</h1>
-        <p className="text-gray-600 mb-8">Transforme suas metas em realidade</p>
-        <div className="flex gap-4 justify-center">
-          <Link
-            href="/login"
-            className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-          >
+    <div className={styles.container}>
+      <div className={styles.content}>
+        <h1 className={styles.title}>Talkvex</h1>
+        <p className={styles.subtitle}>Transforme suas metas em realidade</p>
+        <div className={styles.buttonContainer}>
+          <Link href="/login" className={`${styles.button} ${styles.buttonPrimary}`}>
             Entrar
           </Link>
-          <Link
-            href="/register"
-            className="px-6 py-3 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300"
-          >
+          <Link href="/register" className={`${styles.button} ${styles.buttonSecondary}`}>
             Criar conta
           </Link>
         </div>

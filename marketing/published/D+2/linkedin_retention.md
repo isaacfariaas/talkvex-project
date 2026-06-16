@@ -1,15 +1,29 @@
-# Post LinkedIn: O segredo não está na meta, mas no ritual. ☕
+# LinkedIn Retention (D+2) — Talkvex ☕
 
-O segredo não está na meta, mas no ritual. ☕
+**Objetivo:** Combater a queda de engajamento pós-lançamento e reforçar o valor do "Ritual Diário" como diferencial competitivo.
+**Canal:** LinkedIn / X
+**Asset Visual Sugerido:** Foto lifestyle de alta qualidade (café + app) ou um infográfico simples sobre "Habit Stacking".
 
-Sabe aquela sensação de planejar o ano inteiro e, na segunda semana, já se sentir perdido? Isso acontece porque focamos demais no "onde chegar" e esquecemos do "como caminhar".
+---
 
-No #Talkvex, mudamos o jogo. Não queremos apenas que você defina metas ambiciosas. Queremos que você construa rituais inabaláveis.
+**Headline: O segredo não está na meta, mas no ritual. ☕**
 
-Nossa IA atua como uma parceira de crescimento, transformando grandes visões em passos práticos para o seu dia. Porque a excelência não é um ato isolado, é um hábito.
+**Copy:**
+Muitos começam com empolgação no Dia 0. Mas é no Dia 2 que a verdadeira batalha pela consistência acontece.
 
-48 horas após o lançamento, estamos vendo centenas de usuários redescobrindo o prazer de progredir, um degrau por vez.
+A empolgação inicial é um recurso finito. Ela acaba. E é exatamente aqui que o Talkvex entra para transformar entusiasmo em **sistema**. 🕊️
 
-E você, já estabeleceu seu ritual hoje?
+Não pedimos que você mude sua vida hoje. Pedimos apenas que você proteja o seu **Ritual Talkvex**:
+1. Abra o app no momento em que ligar o computador (ou tomar seu café).
+2. Visualize as 3 tarefas prioritárias geradas pela IA.
+3. Marque a primeira como feita antes das 10h.
 
-#Produtividade #IA #Talkvex #Metas #Crescimento #RitualDiario
+A ciência do **Habit Stacking** (empilhamento de hábitos) diz que se você associar uma nova ação a um hábito já existente, sua chance de sucesso aumenta em 80%. 
+
+Sua meta de 12 meses não será alcançada em um dia heróico. Ela será construída em 365 rituais simples.
+
+Como está sua Streak hoje? ⚡
+
+**Mantenha o foco:** [talkvex.com](http://talkvex.com)
+
+#Talkvex #HabitStacking #Consistency #Productivity #IA #Ritual #Metas #GrowthMindset

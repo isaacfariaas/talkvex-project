@@ -1,0 +1,66 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#0B0F1A"/>
+  
+  <!-- Subtle Grid Pattern -->
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#222D42" stroke-width="0.5"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="url(#grid)" opacity="0.3"/>
+
+  <!-- Logo -->
+  <text x="60" y="60" fill="#4F6EFF" font-family="Inter, sans-serif" font-size="24" font-weight="bold">◆ TALKVEX</text>
+
+  <!-- Headline -->
+  <text x="60" y="240" fill="#EEF2F8" font-family="Inter, sans-serif" font-size="48" font-weight="bold">
+    <tspan x="60" dy="0">Diga onde você quer chegar.</tspan>
+    <tspan x="60" dy="60">A IA monta seu caminho.</tspan>
+  </text>
+  
+  <text x="60" y="400" fill="#7A8BA8" font-family="Inter, sans-serif" font-size="20">
+    <tspan x="60" dy="0">Transforme grandes ambições em rotinas</tspan>
+    <tspan x="60" dy="30">diárias automáticas com inteligência artificial.</tspan>
+  </text>
+
+  <!-- Visual Diagram (Transformation) -->
+  <g transform="translate(700, 150)">
+    <!-- Input Box -->
+    <rect x="0" y="0" width="400" height="80" rx="12" fill="#141927" stroke="#222D42"/>
+    <text x="20" y="45" fill="#EEF2F8" font-family="Inter, sans-serif" font-size="16">"Quero lançar um SaaS em 6 meses"</text>
+    
+    <!-- Sparkles (IA Action) -->
+    <path d="M 200 100 L 205 115 L 220 120 L 205 125 L 200 140 L 195 125 L 180 120 L 195 115 Z" fill="#7C3AED">
+      <animate attributeName="opacity" values="0.4;1;0.4" dur="2s" repeatCount="indefinite" />
+    </path>
+    <circle cx="200" cy="120" r="40" fill="#7C3AED" opacity="0.1"/>
+
+    <!-- Output Structure (The Ladder) -->
+    <g transform="translate(50, 180)">
+      <!-- Year -->
+      <rect x="0" y="0" width="300" height="40" rx="6" fill="#4F6EFF" opacity="0.2" stroke="#4F6EFF" stroke-dasharray="4 2"/>
+      <text x="15" y="25" fill="#4F6EFF" font-family="Inter, sans-serif" font-size="14" font-weight="600">PLANO ANUAL</text>
+      
+      <!-- Quarter -->
+      <rect x="20" y="50" width="280" height="40" rx="6" fill="#4F6EFF" opacity="0.4" stroke="#4F6EFF"/>
+      <text x="35" y="75" fill="#FFFFFF" font-family="Inter, sans-serif" font-size="14" font-weight="600">METAS TRIMESTRAIS</text>
+
+      <!-- Week -->
+      <rect x="40" y="100" width="260" height="40" rx="6" fill="#4F6EFF" opacity="0.7" stroke="#4F6EFF"/>
+      <text x="55" y="125" fill="#FFFFFF" font-family="Inter, sans-serif" font-size="14" font-weight="600">TAREFAS DA SEMANA</text>
+
+      <!-- Day (Active) -->
+      <rect x="60" y="150" width="240" height="40" rx="6" fill="#4F6EFF" stroke="#4F6EFF" stroke-width="2"/>
+      <text x="75" y="175" fill="#FFFFFF" font-family="Inter, sans-serif" font-size="14" font-weight="bold">FOCO DE HOJE</text>
+      <circle cx="280" cy="170" r="8" fill="#10B981"/>
+    </g>
+  </g>
+
+  <!-- CTA Placeholder -->
+  <rect x="60" y="500" width="240" height="50" rx="8" fill="#4F6EFF"/>
+  <text x="180" y="532" text-anchor="middle" fill="#FFFFFF" font-family="Inter, sans-serif" font-size="18" font-weight="bold">Teste agora grátis</text>
+
+  <!-- Tagline -->
+  <text x="1140" y="600" text-anchor="end" fill="#7A8BA8" font-family="Inter, sans-serif" font-size="14">talkvex.com | Da meta à rotina, com IA.</text>
+</svg>

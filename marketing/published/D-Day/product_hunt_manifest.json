@@ -1,0 +1,30 @@
+{
+  "product_name": "Talkvex",
+  "tagline": "Turn big goals into daily routines with your AI mentor.",
+  "links": {
+    "website": "https://www.talkvex.com",
+    "app_store": "",
+    "play_store": ""
+  },
+  "description": "Talkvex is an AI-powered goal management tool that transforms long-term ambitions into consistent daily actions. It doesn't just track tasks; it plans, mentors, and adjusts your route weekly based on your real performance.\n\nMost productivity apps are just glorified shopping lists. They tell you *what* to do, but they don't help you *how* or *when* to do it, especially when life gets in the way.\n\nTalkvex closes the gap between the \"Big Goal\" and the \"Daily To-do\".\n\n**How it works:**\n1. **Define your Destination:** Tell the AI what you want to achieve in natural language.\n2. **AI Plan Generator:** Instantly get a 12-month roadmap, quarterly milestones, and your checklist for the first week.\n3. **Weekly Review:** Every Monday, your AI mentor chats with you to see what worked and recalibrates the next steps. No guilt, just smart adjustments.\n4. **Streak System:** Build momentum with a gamified experience that rewards consistency over intensity.",
+  "topics": [
+    "Productivity",
+    "Artificial Intelligence",
+    "Task Management"
+  ],
+  "media": {
+    "images": [
+      "art1_launch_linkedin.svg",
+      "art2_pain_linkedin.svg",
+      "art3_feature_instagram.svg"
+    ],
+    "video_url": ""
+  },
+  "makers": [
+    "KERNEL (Founder)"
+  ],
+  "hunter": "KERNEL",
+  "first_comment": "Hey Hunters! 👋\n\nI'm one of the creators of Talkvex. We built this because we were tired of \"Plan-Fail-Repeat\" cycles. We realized that the hardest part of any goal isn't the planning—it's the daily execution and the ability to adjust when things don't go as planned.\n\nTalkvex is designed to be the mentor we wish we had: someone (or something) that breaks down the overwhelming stuff and keeps us on track without the \"productivity guilt\".\n\nWe're excited to hear your feedback and help you reach your next big milestone!\n\n**Special Offer for Hunters:** Use code `PH-EARLY` for an extended trial and 50% off for the first 6 months.\n\nLet's go! 🚀",
+  "promo_code": "PH-EARLY",
+  "launch_time_brt": "04:00"
+}

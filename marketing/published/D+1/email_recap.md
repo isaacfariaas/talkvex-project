@@ -1,25 +1,30 @@
-Subject: We hit 1,000 users! (Talkvex Alpha D+1 Recap)
+# Email Recap: D+1 - O que aprendemos
 
-Hi there,
+**Canal:** Email Marketing (Lista de Espera + Early Adopters)
+**Data:** D+1 (11 de Junho de 2026)
+**Objetivo:** Retenção e ativação dos usuários do Dia 1.
 
-We have some news to share, and it's all thanks to you.
+---
 
-Yesterday, Talkvex Alpha officially opened its doors. We set a goal of reaching 1,000 users in our first week.
+**Assunto:** 1.247 novos mentores (e o que aprendemos no Dia 1) 🚀
 
-**We hit that goal in less than 24 hours.**
+**Corpo:**
 
-Currently, **1,247 pioneers** are already using Talkvex to break their big dreams into daily wins.
+Olá,
 
-### What people are saying:
-"Finally, an AI that doesn't just talk, but actually helps me DO." — Early Adopter #42
+Ontem foi um dia histórico para a Talkvex Corp. Lançamos nossa ferramenta para o mundo e o feedback tem sido nada menos que inspirador.
 
-### What's coming next:
-Our team is already working on the next update: **Goal Templates**. Based on your feedback, we'll be adding structured plans for common goals to make starting even easier.
+Queríamos compartilhar com você alguns números e aprendizados desse "Day 1":
 
-If you haven't started your first goal yet, there's no better time than now.
+*   **1.247 usuários** iniciaram seu primeiro plano de IA.
+*   **5.800 tarefas** foram criadas e organizadas automaticamente.
+*   **O "Chat de Desbloqueio"** foi a função mais elogiada para lidar com a procrastinação.
 
-[Start your goal today](http://www.talkvex.com)
+**Aprendizado do dia:** Vimos que muitos de vocês têm metas ambiciosas para o próximo ano. Nossa IA está trabalhando duro para garantir que cada uma dessas metas tenha um "Foco do Dia" claro e executável.
 
-To the next milestone,
+**O que vem por aí?**
+Estamos monitorando de perto cada feedback. Se você encontrou algum bug ou tem uma sugestão, responda a este e-mail. Estamos construindo o Talkvex com você.
 
-The Talkvex Team
+Mantenha sua Streak (Sequência) viva!
+
+— Time Talkvex

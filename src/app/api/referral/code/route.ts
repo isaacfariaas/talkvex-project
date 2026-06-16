@@ -1,33 +1,47 @@
+import { NextResponse } from "next/server";
+import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { ok, err, requireAuth } from "@/lib/api";
+import { nanoid } from "nanoid";
 
 export async function GET() {
   try {
-    const { session, response } = await requireAuth();
-    if (!session) return response!;
+    const session = await auth();
+    if (!session?.user?.id) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
 
-    const user = await prisma.user.findUnique({
+    let user = await prisma.user.findUnique({
       where: { id: session.user.id },
-      select: { referralCode: true, email: true },
+      select: { referralCode: true },
     });
 
     if (!user) {
-      return err("Usuário não encontrado", 404);
+      return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
 
-    // Se o usuário não tiver um código por algum motivo, gera um agora
+    // Generate referral code if user doesn't have one
     if (!user.referralCode) {
-      const newReferralCode = Math.random().toString(36).substring(2, 10).toUpperCase();
-      await prisma.user.update({
+      const referralCode = nanoid(10);
+      user = await prisma.user.update({
         where: { id: session.user.id },
-        data: { referralCode: newReferralCode },
+        data: { referralCode },
+        select: { referralCode: true },
       });
-      return ok({ code: newReferralCode });
     }
 
-    return ok({ code: user.referralCode });
+    const baseUrl = process.env.NEXTAUTH_URL || "http://localhost:3000";
+    const referralLink = `${baseUrl}/register?ref=${user.referralCode}`;
+
+    return NextResponse.json({
+      referralCode: user.referralCode,
+      referralLink,
+      baseUrl,
+    });
   } catch (error) {
-    console.error("[REFERRAL_CODE_GET]", error);
-    return err("Erro interno", 500);
+    console.error("Error getting referral code:", error);
+    return NextResponse.json(
+      { error: "Failed to get referral code" },
+      { status: 500 }
+    );
   }
 }

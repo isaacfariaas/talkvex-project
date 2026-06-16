@@ -1,0 +1,68 @@
+.social-proof {
+  padding: var(--space-2xl) 0;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+  background-color: var(--color-bg);
+}
+
+.proof-label {
+  text-align: center;
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-lg);
+  opacity: 0.8;
+}
+
+.proof-grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-3xl);
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+}
+
+.proof-grid:hover {
+  opacity: 1;
+}
+
+.proof-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  filter: grayscale(1);
+  transition: all var(--transition-base);
+  cursor: default;
+}
+
+.proof-item:hover {
+  filter: grayscale(0);
+  background-color: var(--color-card);
+  box-shadow: var(--shadow-sm);
+  color: var(--color-text-primary);
+  transform: translateY(var(--hover-offset)) scale(1.05);
+}
+
+.proof-item:nth-child(1):hover { color: #0077B5; } /* LinkedIn */
+.proof-item:nth-child(2):hover { color: var(--color-text-primary); } /* X */
+.proof-item:nth-child(3):hover { color: #E4405F; } /* Instagram */
+.proof-item:nth-child(4):hover { color: #FF0000; } /* YouTube */
+.proof-item:nth-child(5):hover { color: #FF6719; } /* Substack */
+
+@media (max-width: 768px) {
+  .proof-grid {
+    gap: var(--space-lg);
+  }
+  
+  .proof-item {
+    font-size: var(--font-size-base);
+  }
+}

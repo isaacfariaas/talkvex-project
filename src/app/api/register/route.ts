@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import { prisma } from "@/lib/prisma";
 import { checkRateLimit } from "@/lib/rate-limit";
+import { nanoid } from "nanoid";
 
 export async function POST(request: NextRequest) {
   try {
@@ -23,7 +24,7 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json();
-    const { name, email, password, referralCode: usedReferralCode } = body;
+    const { name, email, password, referralCode } = body;
 
     if (!name || !email || !password) {
       return NextResponse.json(
@@ -48,36 +49,60 @@ export async function POST(request: NextRequest) {
     }
 
     const hashedPassword = await bcrypt.hash(password, 12);
-    const newReferralCode = Math.random().toString(36).substring(2, 10).toUpperCase();
 
-    const user = await prisma.$transaction(async (tx) => {
-      const newUser = await tx.user.create({
-        data: {
-          name,
-          email,
-          password: hashedPassword,
-          referralCode: newReferralCode,
-        },
-        select: { id: true, name: true, email: true, createdAt: true },
+    // Validate referral code if provided
+    let referrer: { id: string } | null = null;
+    if (referralCode) {
+      referrer = await prisma.user.findUnique({
+        where: { referralCode },
+        select: { id: true },
       });
 
-      if (usedReferralCode) {
-        const referrer = await tx.user.findUnique({
-          where: { referralCode: usedReferralCode.toUpperCase() },
-        });
-
-        if (referrer) {
-          await tx.referral.create({
-            data: {
-              referrerId: referrer.id,
-              referredId: newUser.id,
-            },
-          });
-        }
+      if (!referrer) {
+        return NextResponse.json(
+          { error: "Código de indicação inválido" },
+          { status: 400 }
+        );
       }
+    }
 
-      return newUser;
+    const now = new Date();
+    const proTrialExpiry = referralCode
+      ? new Date(now.getTime() + 15 * 24 * 60 * 60 * 1000)
+      : null;
+
+    // Create user with referral data and generate their own referral code
+    const user = await prisma.user.create({
+      data: {
+        name,
+        email,
+        password: hashedPassword,
+        referralCode: nanoid(10),
+        referredBy: referralCode || null,
+        proExpiresAt: proTrialExpiry,
+      },
+      select: { id: true, name: true, email: true, createdAt: true },
     });
+
+    // Create referral record if user was referred
+    if (referrer) {
+      await prisma.referral.create({
+        data: {
+          referrerId: referrer.id,
+          referredUserId: user.id,
+        },
+      });
+
+      // Create reward record for the new user
+      await prisma.referralReward.create({
+        data: {
+          userId: user.id,
+          type: "PRO_TRIAL",
+          description: "15 dias de Talkvex Pro (boas-vindas via indicação)",
+          expiresAt: proTrialExpiry,
+        },
+      });
+    }
 
     return NextResponse.json(user, {
       status: 201,

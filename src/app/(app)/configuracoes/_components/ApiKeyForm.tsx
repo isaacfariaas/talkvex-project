@@ -7,6 +7,7 @@ export function ApiKeyForm() {
   const [apiKey, setApiKey] = useState("");
   const [showApiKey, setShowApiKey] = useState(false);
   const [hasApiKey, setHasApiKey] = useState(false);
+  const [maskedKey, setMaskedKey] = useState<string | null>(null);
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
 
@@ -18,7 +19,7 @@ export function ApiKeyForm() {
           const data = await res.json();
           setHasApiKey(data.hasApiKey);
           if (data.anthropicApiKey) {
-            setApiKey(data.anthropicApiKey);
+            setMaskedKey(data.anthropicApiKey);
           }
         }
       } catch {
@@ -32,6 +33,17 @@ export function ApiKeyForm() {
     e.preventDefault();
     setStatus("loading");
     setMessage("");
+
+    // Don't submit if user hasn't entered a new key
+    if (!apiKey && hasApiKey) {
+      setStatus("error");
+      setMessage("Digite uma nova chave para atualizar ou limpe o campo para remover");
+      setTimeout(() => {
+        setStatus("idle");
+        setMessage("");
+      }, 3000);
+      return;
+    }
 
     try {
       const res = await fetch("/api/user/api-key", {
@@ -51,6 +63,19 @@ export function ApiKeyForm() {
       setStatus("success");
       setMessage("Chave API salva com sucesso");
       setHasApiKey(!!apiKey);
+      setApiKey("");
+
+      // Fetch the updated masked key
+      if (apiKey) {
+        const keyRes = await fetch("/api/user/api-key");
+        if (keyRes.ok) {
+          const keyData = await keyRes.json();
+          setMaskedKey(keyData.anthropicApiKey);
+        }
+      } else {
+        setMaskedKey(null);
+      }
+
       setTimeout(() => {
         setStatus("idle");
         setMessage("");
@@ -79,9 +104,23 @@ export function ApiKeyForm() {
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-4">
+        {hasApiKey && maskedKey && (
+          <div className="mb-3 p-3 rounded-lg border" style={{
+            background: "hsl(var(--muted))",
+            borderColor: "hsl(var(--border))"
+          }}>
+            <p className="text-xs font-medium mb-1" style={{ color: "hsl(var(--muted-foreground))" }}>
+              Chave atual configurada:
+            </p>
+            <code className="text-sm" style={{ color: "hsl(var(--foreground))" }}>
+              {maskedKey}
+            </code>
+          </div>
+        )}
+
         <div>
           <label htmlFor="apiKey" className="block text-sm font-medium mb-2" style={{ color: "hsl(var(--foreground))" }}>
-            Chave API
+            {hasApiKey ? "Nova Chave API (deixe vazio para manter a atual)" : "Chave API"}
           </label>
           <div className="relative">
             <input
@@ -89,7 +128,7 @@ export function ApiKeyForm() {
               type={showApiKey ? "text" : "password"}
               value={apiKey}
               onChange={(e) => setApiKey(e.target.value)}
-              placeholder={hasApiKey ? "••••••••••••••••" : "sk-ant-api03-..."}
+              placeholder={hasApiKey ? "Digite uma nova chave para atualizar..." : "sk-ant-api03-..."}
               className="w-full px-3 py-2 pr-10 border rounded-lg focus:outline-none focus:ring-2"
               style={{
                 background: "hsl(var(--background))",

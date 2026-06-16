@@ -1,20 +1,31 @@
-# E-mail: O segredo não está na meta, mas no ritual. ☕
+# Email Retention (D+2) — Talkvex ☕
 
-**Assunto:** O segredo não está na meta, mas no ritual. ☕
+**Assunto:** Sua meta não é um evento, é um ritual. ☕
+**Preheader:** Por que as primeiras 48 horas definem o seu sucesso.
 
-Olá, [Nome],
+---
 
-Como foram as primeiras 48 horas com o Talkvex?
+Olá, **{{first_name}}**!
 
-Muitas vezes, começamos um novo projeto ou meta com todo o gás, mas a empolgação inicial logo esbarra na complexidade do dia a dia. É aqui que a maioria das pessoas desiste.
+A empolgação do lançamento é contagiante, mas é hoje — no segundo dia — que a jornada real começa.
 
-No Talkvex, acreditamos que **o segredo não está na meta, mas no ritual.**
+Estudos de psicologia comportamental mostram que a maioria das pessoas abandona novos hábitos nas primeiras 48 horas. O motivo? Tentamos mudar a vida inteira de uma vez, ignorando o poder do **Ritual**.
 
-A sua meta é o destino, mas o seu ritual diário é o veículo. Nossa IA foi desenhada para ser sua parceira de crescimento, ajudando você a quebrar essa "montanha" de objetivos em degraus diários simples e gerenciáveis.
+No Talkvex, não pedimos que você suba o Everest hoje. Pedimos apenas que você mantenha o seu **Ritual Talkvex**.
 
-**Dica do dia:** Já conferiu seu Tracker Diário hoje? Reserve 5 minutos para validar suas pequenas vitórias. O progresso consistente vence a perfeição esporádica todas as vezes.
+**A ciência do Habit Stacking (Empilhamento de Hábitos):**
+O segredo da consistência é associar o novo hábito a algo que você já faz automaticamente. 
 
-[Botão: Ver meu ritual de hoje]
+*Dica:* Abra o Talkvex enquanto toma seu primeiro café da manhã. Associe o prazer da cafeína à clareza do seu **Foco do Dia**. Estudos mostram que essa técnica aumenta sua chance de manter a consistência em até 80%.
 
-Vamos pra cima,
-Equipe Talkvex
+**O desafio de hoje:**
+Sua IA já preparou as 3 tarefas essenciais para o seu dia. Elas foram desenhadas para serem simples, porém cirúrgicas para o seu progresso.
+
+**[Botão: Abrir meu Ritual de hoje]**
+
+Não deixe sua Streak morrer no Dia 2. Grandes destinos são alcançados com passos pequenos, mas ininterruptos.
+
+Vamos juntos?
+
+— **Equipe Talkvex**
+*Da meta à rotina, com inteligência.*

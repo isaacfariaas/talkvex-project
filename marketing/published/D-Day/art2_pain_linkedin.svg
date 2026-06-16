@@ -1,0 +1,64 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#0B0F1A"/>
+  
+  <!-- Subtle Gradient Accent -->
+  <circle cx="1200" cy="0" r="600" fill="#4F6EFF" opacity="0.05"/>
+  <circle cx="0" cy="630" r="400" fill="#7C3AED" opacity="0.05"/>
+
+  <!-- Logo -->
+  <text x="60" y="60" fill="#4F6EFF" font-family="Inter, sans-serif" font-size="24" font-weight="bold">◆ TALKVEX</text>
+
+  <!-- Headline -->
+  <text x="600" y="150" text-anchor="middle" fill="#EEF2F8" font-family="Inter, sans-serif" font-size="44" font-weight="bold">
+    <tspan x="600" dy="0">O problema não é a sua falta de vontade.</tspan>
+    <tspan x="600" dy="60" fill="#EF4444">É o seu sistema.</tspan>
+  </text>
+
+  <!-- Comparison Section -->
+  <g transform="translate(100, 280)">
+    <!-- Traditional System -->
+    <g transform="translate(0, 0)">
+      <rect width="450" height="250" rx="16" fill="#141927" stroke="#222D42" opacity="0.5"/>
+      <text x="225" y="-20" text-anchor="middle" fill="#7A8BA8" font-family="Inter, sans-serif" font-size="18">Sistemas Comuns</text>
+      
+      <!-- Messy Notes -->
+      <rect x="40" y="40" width="150" height="20" rx="4" fill="#222D42"/>
+      <rect x="40" y="80" width="200" height="20" rx="4" fill="#222D42"/>
+      <rect x="260" y="50" width="120" height="20" rx="4" fill="#222D42"/>
+      <rect x="40" y="120" width="180" height="20" rx="4" fill="#222D42"/>
+      <path d="M 300 150 L 350 180 L 280 210" stroke="#7A8BA8" stroke-width="2" stroke-dasharray="4 4"/>
+      
+      <text x="225" y="220" text-anchor="middle" fill="#7A8BA8" font-family="Inter, sans-serif" font-size="14">Nebuloso, estático, cansativo.</text>
+    </g>
+
+    <!-- VS Divider -->
+    <text x="500" y="125" text-anchor="middle" fill="#222D42" font-family="Inter, sans-serif" font-size="32" font-weight="bold">VS</text>
+
+    <!-- Talkvex System -->
+    <g transform="translate(550, 0)">
+      <rect width="450" height="250" rx="16" fill="#141927" stroke="#4F6EFF" stroke-width="2"/>
+      <text x="225" y="-20" text-anchor="middle" fill="#4F6EFF" font-family="Inter, sans-serif" font-size="18" font-weight="bold">Sistema Talkvex</text>
+      
+      <!-- Clear Path -->
+      <g transform="translate(50, 50)">
+        <!-- Steps -->
+        <rect x="0" y="140" width="80" height="12" rx="6" fill="#4F6EFF"/>
+        <rect x="90" y="110" width="80" height="12" rx="6" fill="#4F6EFF"/>
+        <rect x="180" y="80" width="80" height="12" rx="6" fill="#4F6EFF"/>
+        <rect x="270" y="50" width="80" height="12" rx="6" fill="#4F6EFF"/>
+        
+        <!-- Connection Line -->
+        <path d="M 40 140 L 130 110 L 220 80 L 310 50" stroke="#7C3AED" stroke-width="3" fill="none" opacity="0.6"/>
+        <circle cx="310" cy="50" r="6" fill="#10B981">
+           <animate attributeName="r" values="6;9;6" dur="1.5s" repeatCount="indefinite" />
+        </circle>
+      </g>
+      
+      <text x="225" y="220" text-anchor="middle" fill="#EEF2F8" font-family="Inter, sans-serif" font-size="14">Claro, inteligente, automático.</text>
+    </g>
+  </g>
+
+  <!-- Footer -->
+  <text x="600" y="580" text-anchor="middle" fill="#7A8BA8" font-family="Inter, sans-serif" font-size="16">Recupere o controle da sua execução. <tspan fill="#4F6EFF" font-weight="bold">talkvex.com</tspan></text>
+</svg>

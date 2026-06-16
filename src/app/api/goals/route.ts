@@ -2,7 +2,6 @@ import { NextRequest } from "next/server";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma";
 import { ok, err, requireAuth } from "@/lib/api";
-import { checkReferralCompletion } from "@/lib/referral";
 
 const createGoalSchema = z.object({
   title: z.string().min(1).max(255),
@@ -70,10 +69,27 @@ export async function POST(req: NextRequest) {
     },
   });
 
-  // Background check for referral completion
-  checkReferralCompletion(session.user.id).catch(err => 
-    console.error("[REFERRAL_ASYNC_CHECK_ERROR]", err)
-  );
+  // Check if this is the user's first goal and trigger referral conversion
+  const goalCount = await prisma.goal.count({
+    where: { userId: session.user.id },
+  });
+
+  if (goalCount === 1) {
+    const userRef = await prisma.user.findUnique({
+      where: { id: session.user.id },
+      select: { referredBy: true },
+    });
+
+    if (userRef?.referredBy) {
+      // Trigger referral conversion asynchronously
+      fetch(`${process.env.NEXTAUTH_URL || "http://localhost:3000"}/api/referral/convert`, {
+        method: "POST",
+        headers: {
+          Cookie: req.headers.get("cookie") || "",
+        },
+      }).catch((err) => console.error("Failed to convert referral:", err));
+    }
+  }
 
   return ok(goal, 201);
 }

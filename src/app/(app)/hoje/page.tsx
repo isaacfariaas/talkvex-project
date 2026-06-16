@@ -65,12 +65,15 @@ export default async function HojePage() {
   function calcProgress(goal: (typeof goals)[0]) {
     const plan = goal.annualPlans[0];
     if (!plan) return 0;
-    const allTasks = plan.milestones.flatMap((m) => m.weeklyTasks);
+    type Milestone = typeof plan.milestones[number];
+    const allTasks = plan.milestones.flatMap((m: Milestone) => m.weeklyTasks);
     if (allTasks.length === 0) return 0;
-    return Math.round((allTasks.filter((t) => t.completed).length / allTasks.length) * 100);
+    type WeeklyTask = typeof allTasks[number];
+    return Math.round((allTasks.filter((t: WeeklyTask) => t.completed).length / allTasks.length) * 100);
   }
 
-  const todayTaskCount = tasks.filter((t) => !t.completed).length;
+  type Task = typeof tasks[number];
+  const todayTaskCount = tasks.filter((t: Task) => !t.completed).length;
 
   return (
     <div className="px-4 md:px-8 py-6 md:py-8 max-w-4xl">
@@ -130,7 +133,7 @@ export default async function HojePage() {
               </Link>
             </div>
             <div className="space-y-3">
-              {goals.map((goal) => {
+              {goals.map((goal: typeof goals[number]) => {
                 const progress = calcProgress(goal);
                 const hasPlan = goal.annualPlans.length > 0;
                 return (
@@ -177,7 +180,7 @@ export default async function HojePage() {
               Foco da semana
             </h2>
             <WeekTasksCard
-              tasks={tasks.map((t) => ({
+              tasks={tasks.map((t: Task) => ({
                 id: t.id,
                 title: t.title,
                 completed: t.completed,
@@ -206,7 +209,7 @@ export default async function HojePage() {
               </Link>
             </div>
             <HabitsCard
-              habits={habits.map((h) => ({
+              habits={habits.map((h: typeof habits[number]) => ({
                 id: h.id,
                 title: h.title,
                 completed: h.completed,

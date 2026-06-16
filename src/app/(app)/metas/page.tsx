@@ -45,13 +45,13 @@ export default async function MetasPage() {
   function calcProgress(goal: (typeof goals)[0]) {
     const plan = goal.annualPlans[0];
     if (!plan) return 0;
-    const allTasks = plan.milestones.flatMap((m) => m.weeklyTasks);
+    const allTasks = plan.milestones.flatMap((m: any) => m.weeklyTasks);
     if (allTasks.length === 0) return 0;
-    return Math.round((allTasks.filter((t) => t.completed).length / allTasks.length) * 100);
+    return Math.round((allTasks.filter((t: any) => t.completed).length / allTasks.length) * 100);
   }
 
-  const active = goals.filter((g) => g.status === "ACTIVE");
-  const others = goals.filter((g) => g.status !== "ACTIVE");
+  const active = goals.filter((g: any) => g.status === "ACTIVE");
+  const others = goals.filter((g: any) => g.status !== "ACTIVE");
 
   return (
     <div className="px-4 md:px-8 py-6 md:py-8 max-w-4xl">

@@ -83,7 +83,8 @@ export default async function HabitosPage() {
   });
 
   // Group by habit title for consistency tracking
-  const habitGroups = habits.reduce((acc, habit) => {
+  type Habit = typeof habits[number];
+  const habitGroups = habits.reduce((acc: Record<string, { date: Date; completed: boolean }[]>, habit: Habit) => {
     const key = habit.title;
     if (!acc[key]) acc[key] = [];
     acc[key].push({ date: habit.date, completed: habit.completed });
@@ -92,21 +93,24 @@ export default async function HabitosPage() {
 
   // Calculate overall stats
   const totalDays = habits.length;
-  const completedDays = habits.filter((h) => h.completed).length;
+  const completedDays = habits.filter((h: Habit) => h.completed).length;
   const completionRate = totalDays > 0 ? Math.round((completedDays / totalDays) * 100) : 0;
 
   // Calculate best streak across all habits
   let overallBestStreak = 0;
   let overallCurrentStreak = 0;
 
-  Object.values(habitGroups).forEach((completions) => {
+  type CompletionEntry = { date: Date; completed: boolean };
+  const habitGroupValues = Object.values(habitGroups) as CompletionEntry[][];
+  habitGroupValues.forEach((completions) => {
     const { current, best } = calculateStreak(completions);
     overallBestStreak = Math.max(overallBestStreak, best);
     overallCurrentStreak = Math.max(overallCurrentStreak, current);
   });
 
   // Get unique habit titles with their frequencies
-  const uniqueHabits = Object.entries(habitGroups).map(([title, completions]) => {
+  const habitGroupEntries = Object.entries(habitGroups) as [string, CompletionEntry[]][];
+  const uniqueHabits = habitGroupEntries.map(([title, completions]) => {
     const { current, best } = calculateStreak(completions);
     const total = completions.length;
     const completed = completions.filter((c) => c.completed).length;
@@ -198,7 +202,7 @@ export default async function HabitosPage() {
         <h2 className="text-base font-semibold mb-4" style={{ color: "hsl(var(--foreground))" }}>
           Histórico de Consistência
         </h2>
-        <CalendarHeatmap habits={habits.map((h) => ({ date: h.date, completed: h.completed }))} />
+        <CalendarHeatmap habits={habits.map((h: Habit) => ({ date: h.date, completed: h.completed }))} />
       </div>
 
       {/* Habits List */}
