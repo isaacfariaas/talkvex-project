@@ -2,6 +2,7 @@ import { NextRequest } from "next/server";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma";
 import { ok, err, requireAuth } from "@/lib/api";
+import { checkReferralCompletion } from "@/lib/referral";
 
 const createGoalSchema = z.object({
   title: z.string().min(1).max(255),
@@ -68,6 +69,11 @@ export async function POST(req: NextRequest) {
       deadline,
     },
   });
+
+  // Background check for referral completion
+  checkReferralCompletion(session.user.id).catch(err => 
+    console.error("[REFERRAL_ASYNC_CHECK_ERROR]", err)
+  );
 
   return ok(goal, 201);
 }

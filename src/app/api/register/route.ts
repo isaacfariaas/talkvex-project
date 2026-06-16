@@ -23,7 +23,7 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json();
-    const { name, email, password } = body;
+    const { name, email, password, referralCode: usedReferralCode } = body;
 
     if (!name || !email || !password) {
       return NextResponse.json(
@@ -48,10 +48,35 @@ export async function POST(request: NextRequest) {
     }
 
     const hashedPassword = await bcrypt.hash(password, 12);
+    const newReferralCode = Math.random().toString(36).substring(2, 10).toUpperCase();
 
-    const user = await prisma.user.create({
-      data: { name, email, password: hashedPassword },
-      select: { id: true, name: true, email: true, createdAt: true },
+    const user = await prisma.$transaction(async (tx) => {
+      const newUser = await tx.user.create({
+        data: {
+          name,
+          email,
+          password: hashedPassword,
+          referralCode: newReferralCode,
+        },
+        select: { id: true, name: true, email: true, createdAt: true },
+      });
+
+      if (usedReferralCode) {
+        const referrer = await tx.user.findUnique({
+          where: { referralCode: usedReferralCode.toUpperCase() },
+        });
+
+        if (referrer) {
+          await tx.referral.create({
+            data: {
+              referrerId: referrer.id,
+              referredId: newUser.id,
+            },
+          });
+        }
+      }
+
+      return newUser;
     });
 
     return NextResponse.json(user, {
