@@ -12,7 +12,7 @@ Há uma semana, lançamos o Alpha do Talkvex. Ontem, vivemos o nosso primeiro gr
 
 Durante a nossa Masterclass, mais de 1.100 pessoas se reuniram para uma conversa honesta sobre produtividade. E sim, como muitos viram, nossos servidores sentiram o peso do hype (o famoso Erro 500).
 
-Mas o que aconteceu depois foi o que realmente nos surpreendeu.
+But o que aconteceu depois foi o que realmente nos surpreendeu.
 
 **Aqui está o resumo da nossa primeira semana:**
 

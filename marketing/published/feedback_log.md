@@ -31,4 +31,16 @@ Este documento registra as principais interações capturadas nos canais oficiai
 - **Neutro:** 12% (Dúvidas técnicas e solicitações de integração).
 - **Negativo:** 6% (Pequenos bugs de UI e latência de resposta da IA).
 
-**Status:** Monitoramento contínuo. Próximo relatório em D+7.
+---
+
+## 4. Recuperação de Resiliência (D+11)
+
+**Canal:** LinkedIn / Instagram
+**Sentimento:** Altamente Positivo (88%).
+**Insights:**
+- A mensagem de "não se culpar por perder um dia" gerou um pico de engajamento emocional.
+- Usuários estão marcando amigos que "desapareceram" do app na última semana.
+- **Ação:** Reforçar o conceito de "Recálculo de Rota" no artigo de D+12 para manter o momentum.
+
+**Status:** Monitoramento contínuo. Próximo relatório em D+14.
+

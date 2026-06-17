@@ -23,8 +23,6 @@ Como o Pedro (dono da Talk & Coffee) conseguiu abrir seu negócio em tempo recor
 
 Produtividade real é sobre **clareza**, não sobre volume.
 
-Confira o artigo completo sobre o "Método Talkvex" e veja como aplicar isso na sua jornada: [LINK_DO_ARTIGO]
-
-E você? Está tentando escalar a montanha inteira ou apenas dando o próximo passo? 🚀
+Confira o artigo completo sobre o "Método Talkvex" e veja como aplicar isso na sua jornada: talkvex.ai/blog/arquitetura-da-conquista 🚀
 
 #TalkvexStories #Produtividade #IA #Metas #Clareza #Empreendedorismo

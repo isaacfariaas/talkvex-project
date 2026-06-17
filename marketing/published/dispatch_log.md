@@ -36,6 +36,8 @@
 ### 15 de Junho de 2026 (D+9 - Segunda-feira) - Sustentação e Prova Social
 - **Webinar Replay:** [email_webinar_replay.md](./D+8/email_webinar_replay.md) -> DISPARADO 🍿 (09:00 BRT).
 - **Talkvex Stories Ep 2 (João):** [linkedin_joao_story.md](./D+8/linkedin_joao_story.md) -> DISPARADO 🏃‍♂️ (11:00 BRT).
+- **Alpha Feedback Consolidation:** [alpha_feedback_consolidation_D9.md](./D+9/alpha_feedback_consolidation_D9.md) -> **RESTAURADO** (Referência Interna).
+- **Alpha Update Post:** [alpha_update_post.md](./D+9/alpha_update_post.md) -> **RESTAURADO** (DISPARADO 🚀 14:00 BRT).
 - **Social Proof Wrap-up (Webinar):** [social_proof_text_only.md](./D+9/social_proof_text_only.md) -> DISPARADO 📱 (16:00 BRT). *Nota: Versão texto utilizada (Artes ausentes).*
 - **Blog Post Recap (Webinar):** [blog_post_recap.md](./D+9/blog_post_recap.md) -> DISPARADO 📝 (18:00 BRT).
 
@@ -45,8 +47,8 @@
 - **Calendar Teaser:** [calendar_teaser.md](./D+10/calendar_teaser.md) -> DISPARADO 🚀 (18:00 BRT).
 
 ### 17 de Junho de 2026 (D+11 - Quarta-feira)
-- **Resilience Recovery Email:** [email_recovery.md](./D+11/email_recovery.md) -> Programado.
-- **Social Resilience Recovery:** [social_resilience_recovery.md](./D+11/social_resilience_recovery.md) -> Programado.
+- **Resilience Recovery Email:** [email_recovery.md](./D+11/email_recovery.md) -> DISPARADO 📧 (09:00 BRT).
+- **Social Resilience Recovery:** [social_resilience_recovery.md](./D+11/social_resilience_recovery.md) -> DISPARADO 🚀 (11:00 BRT).
 
 ### 18 de Junho de 2026 (D+12 - Quinta-feira)
 - **Architecture of Achievement (Article):** [architecture_of_achievement.md](./D+12/architecture_of_achievement.md) -> **NOVO** (Programado 11:00 BRT).
@@ -61,6 +63,7 @@
 - **Habit Curve Social:** [social_habit_curve.md](./D+14/social_habit_curve.md) -> **RESTAURADO** (Pronto p/ Agendamento).
 - **Streak Card Social:** [social_streak_card.md](./D+14/social_streak_card.md) -> **RESTAURADO** (Pronto p/ Agendamento).
 - **Referral Milestone:** [referral_milestone.md](./D+14/referral_milestone.md) -> **RESTAURADO** (Pronto p/ Implementação).
+- **Design Briefing D+14:** [DESIGN_BRIEFING_D14.md](./D+14/DESIGN_BRIEFING_D14.md) -> **CRIADO** (Enviado p/ DESIGNER).
 
 
 

@@ -63,7 +63,7 @@ export const Dashboard: FC = () => {
 
           {/* Productivity Stats */}
           <div className={styles['stats-column']}>
-            <div className={`${styles.card} ${styles['stat-card']} ${styles['animate-in']}`} style={{ '--delay': '0.1s' } as any}>
+            <div className={`${styles.card} ${styles['stat-card']} ${styles['animate-in']}`} style={{ '--delay': '0.1s' } as React.CSSProperties}>
               <div className={styles['stat-info']}>
                 <TrendingUp className={styles['stat-icon']} />
                 <div>
@@ -73,7 +73,7 @@ export const Dashboard: FC = () => {
               </div>
             </div>
 
-            <div className={`${styles.card} ${styles['stat-card']} ${styles['animate-in']}`} style={{ '--delay': '0.2s' } as any}>
+            <div className={`${styles.card} ${styles['stat-card']} ${styles['animate-in']}`} style={{ '--delay': '0.2s' } as React.CSSProperties}>
               <div className={styles['stat-info']}>
                 <Clock className={styles['stat-icon']} />
                 <div>
@@ -85,7 +85,7 @@ export const Dashboard: FC = () => {
           </div>
 
           {/* Schedule Preview */}
-          <div className={`${styles.card} ${styles['schedule-card']} ${styles['animate-in']}`} style={{ '--delay': '0.3s' } as any}>
+          <div className={`${styles.card} ${styles['schedule-card']} ${styles['animate-in']}`} style={{ '--delay': '0.3s' } as React.CSSProperties}>
             <div className={styles['card-header']}>
               <Calendar className={styles.icon} />
               <h3>Próximas Prioridades</h3>

@@ -15,7 +15,7 @@
 **Título:** Você é um "Habit Builder" Oficial! 🎖️
 
 **Mensagem:**
-"Parabéns, **{{first_name}}**! Apenas 20% dos usuários chegam ao marco de 14 dias com essa consistência.
+"Parabéns, **{{first_name}}**! Apenas 20% dos usuários chegam ao marco de 14 dias com essa consitência.
 
 Sua jornada está apenas começando, mas você já provou que leva suas metas a sério. Como recompensa, queremos te ajudar a escalar seu progresso:
 

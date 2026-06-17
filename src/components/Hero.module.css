@@ -85,7 +85,7 @@
 }
 
 .visual-card {
-  background: rgba(var(--card-hsl) / 0.5);
+  background: hsla(var(--card-hsl) / 0.5);
   backdrop-filter: blur(var(--blur-lg));
   border: 1px solid hsla(var(--border-hsl) / 0.5);
   border-radius: var(--radius-lg);

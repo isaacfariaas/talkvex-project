@@ -1,21 +1,17 @@
-import Link from "next/link";
-import styles from "./page.module.css";
+import { redirect } from "next/navigation";
+import { auth } from "@/lib/auth";
+import { Hero, Features, SocialProof, Footer } from "@/components/landing";
 
-export default function Home() {
+export default async function Home() {
+  const session = await auth();
+  if (session) redirect("/hoje");
+
   return (
-    <div className={styles.container}>
-      <div className={styles.content}>
-        <h1 className={styles.title}>Talkvex</h1>
-        <p className={styles.subtitle}>Transforme suas metas em realidade</p>
-        <div className={styles.buttonContainer}>
-          <Link href="/login" className={`${styles.button} ${styles.buttonPrimary}`}>
-            Entrar
-          </Link>
-          <Link href="/register" className={`${styles.button} ${styles.buttonSecondary}`}>
-            Criar conta
-          </Link>
-        </div>
-      </div>
+    <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
+      <Hero />
+      <Features />
+      <SocialProof />
+      <Footer />
     </div>
   );
 }
